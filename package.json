@@ -1,0 +1,39 @@
+{
+  "name": "sitedown",
+  "description": "Generate a site from a collection of markdown files.",
+  "version": "0.0.0",
+  "author": "Nate Goldman <nate@ngoldman.me>",
+  "bin": {
+    "sitedown": "./bin.js"
+  },
+  "bugs": {
+    "url": "https://github.com/ngoldman/sitedown/issues"
+  },
+  "dependencies": {
+    "cwp": "^1.0.0",
+    "glob": "^5.0.13",
+    "markdown-it": "^4.3.0"
+  },
+  "devDependencies": {
+    "standard": "*",
+    "tap-spec": "^4.0.2",
+    "tape": "^4.0.0"
+  },
+  "homepage": "https://github.com/ngoldman/sitedown",
+  "keywords": [
+    "generator",
+    "markdown",
+    "site",
+    "static",
+    "website"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ngoldman/sitedown.git"
+  },
+  "scripts": {
+    "test": "standard && tape test/*.js | tap-spec"
+  }
+}
