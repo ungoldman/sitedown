@@ -8,31 +8,39 @@
 [travis-image]: https://img.shields.io/travis/ngoldman/sitedown.svg?style=flat-square
 [travis-url]: https://travis-ci.org/ngoldman/sitedown
 
-Generate a site from a collection of markdown files.
+Generate a static HTML site from a collection of markdown files.
 
 **work in progress**
 
 ## Install
 
 ```
-npm install sitedown
+npm install sitedown -g
 ```
 
 ## Usage
+
+### CLI
+
+```
+$ sitedown
+```
+
+### Node API
 
 ```js
 var sitedown = require('sitedown')
 
 var options = {
-  source: '.',                      // source directory
-  header: './partials/header.html', // path to header partial
-  footer: './partials/footer.html', // path to footer partial
-  output: './sitedown/'             // path to output folder
+  root: '.'         // source directory (defaults to cwd)
+  header: '',       // path to header partial (defaults to '')
+  footer: '',       // path to footer partial (defaults to '')
+  output: './site/' // path to output folder  (defaults to 'site' in cwd)
 }
 
 sitedown(options, function (err) {
   if (err) return console.error(err)
-  console.log('✓ success')
+  console.log('success')
 })
 ```
 
