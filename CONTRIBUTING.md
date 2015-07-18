@@ -6,7 +6,7 @@ Contributions welcome!
 
 Please search issues and pull requests before adding something new to avoid duplicating efforts and conversations.
 
-In addition to improving the project by refactoring code and and implementing relevant features, this project welcomes the following types of contributions:
+In addition to improving the project by refactoring code and implementing relevant features, this project welcomes the following types of contributions:
 
 - **Ideas**: participate in an issue thread or start your own to have your voice heard.
 - **Writing**: contribute your expertise in an area by helping expand the included content.
@@ -29,8 +29,6 @@ This repository uses [`standard`][standard-url] to maintain code style and consi
 
 [standard-image]: https://cdn.rawgit.com/feross/standard/master/badge.svg
 [standard-url]: https://github.com/feross/standard
-[semistandard-image]: https://cdn.rawgit.com/flet/semistandard/master/badge.svg
-[semistandard-url]: https://github.com/Flet/semistandard
 
 ---
 
