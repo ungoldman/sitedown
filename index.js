@@ -37,12 +37,11 @@ function sitedown (options, callback) {
       return entry.path
     }))
     .on('data', function (file) {
-      var dest = file.split('/').slice(0, -1).join('/')
-      var name = file.split('.')[0].split('/').pop()
+      var parsedFile = path.parse(file)
+      if (parsedFile.name === 'README') parsedFile.name = 'index'
+      parsedFile.base = parsedFile.name + '.html'
 
-      if (name === 'README') name = 'index'
-
-      dest = path.join(dest, name + '.html')
+      var dest = path.format(parsedFile)
 
       var pageBody = fileToPageBody(path.join(root, file))
       var html = buildPage(header, pageBody, footer)
