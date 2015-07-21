@@ -8,7 +8,8 @@ test('markdown to html', function (t) {
 
   var opts = {
     root: path.join(__dirname, 'markdown'),
-    output: path.join(__dirname, 'site')
+    output: path.join(__dirname, 'site'),
+    silent: true
   }
 
   rimraf(opts.output, generateSite)
@@ -34,7 +35,8 @@ test('header & footer concatenation', function (t) {
     root: path.join(__dirname, 'markdown'),
     header: '<blink>w00t</blink>',
     footer: '<marquee>THE END</marquee>',
-    output: path.join(__dirname, 'site')
+    output: path.join(__dirname, 'site'),
+    silent: true
   }
 
   rimraf(opts.output, generateSite)

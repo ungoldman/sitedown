@@ -50,7 +50,7 @@ function sitedown (options, callback) {
 
       fs.writeFile(path.join(output, dest), html, encoding, function (err) {
         if (err) return console.error(err)
-        console.log('built', dest)
+        if (options.silent) console.log('built', dest)
       })
     })
     .on('end', function () {
