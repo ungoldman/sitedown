@@ -49,4 +49,4 @@ if (argv.help) {
 
 if (argv._[0]) argv.source = argv._[0]
 
-sitedown(argv)
+sitedown()
