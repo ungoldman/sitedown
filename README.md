@@ -10,8 +10,6 @@
 [travis-image]: https://img.shields.io/travis/ngoldman/sitedown.svg?style=flat-square
 [travis-url]: https://travis-ci.org/ngoldman/sitedown
 
-**work in progress**
-
 ## Install
 
 ```
