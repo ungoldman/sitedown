@@ -39,7 +39,7 @@ function sitedown (options, callback) {
       callback(err)
     })
     .pipe(es.mapSync(function (entry) {
-      return entry.source
+      return entry.path
     }))
     .on('data', function (file) {
       options.files.push(file)
