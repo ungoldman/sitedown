@@ -21,15 +21,16 @@ function noop () {}
  */
 function sitedown (options, callback) {
   options = options || {}
-  var root = options.root || cwp('.')
-  var header = options.header || ''
-  var footer = options.footer || ''
-  var output = options.output || cwp('./site/')
+  options.root = options.root || cwp('.')
+  options.header = options.header || ''
+  options.footer = options.footer || ''
+  options.output = options.output || cwp('./site/')
+  options.files = []
 
   if (typeof callback === 'undefined') callback = noop
 
   readdirp({
-    root: root,
+    root: options.root,
     fileFilter: ['*.md', '*.markdown'],
     directoryFilter: ['!.git', '!node_modules']
   })
@@ -43,26 +44,10 @@ function sitedown (options, callback) {
       return entry.path
     }))
     .on('data', function (file) {
-      var parsedFile = path.parse(file)
-
-      if (parsedFile.name === 'README') parsedFile.name = 'index'
-
-      parsedFile.base = parsedFile.name + '.html'
-      parsedFile.ext = '.html'
-
-      var dest = path.format(parsedFile)
-      var pageBody = fileToPageBody(path.join(root, file))
-      var html = buildPage(header, pageBody, footer)
-
-      mkdirp.sync(path.join(output, parsedFile.dir))
-
-      fs.writeFile(path.join(output, dest), html, encoding, function (err) {
-        if (err) return console.error(err)
-        if (options.silent) console.log('built', dest)
-      })
+      options.files.push(file)
     })
     .on('end', function () {
-      callback(null, true)
+      generateSite(options, callback)
     })
 }
 
@@ -93,5 +78,38 @@ function buildPage (header, body, footer) {
 
   return header + body + footer
 }
+
+/**
+ * Generates site from array of markdown file paths.
+ *
+ * @param  {Object}   opt      root, header, footer, output, silent, files
+ * @param  {Function} callback
+ */
+function generateSite (opt, callback) {
+  opt.files.forEach(function (file) {
+    var parsedFile = path.parse(file)
+
+    if (parsedFile.name === 'README') parsedFile.name = 'index'
+
+    parsedFile.base = parsedFile.name + '.html'
+    parsedFile.ext = '.html'
+
+    var dest = path.format(parsedFile)
+    var pageBody = fileToPageBody(path.join(opt.root, file))
+    var html = buildPage(opt.header, pageBody, opt.footer)
+
+    mkdirp.sync(path.join(opt.output, parsedFile.dir))
+
+    fs.writeFileSync(path.join(opt.output, dest), html, encoding)
+
+    if (!opt.silent) console.log('built', dest)
+  })
+
+  callback(null)
+}
+
+sitedown.fileToPageBody = fileToPageBody
+sitedown.buildPage = buildPage
+sitedown.generateSite = generateSite
 
 module.exports = sitedown
