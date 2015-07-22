@@ -33,22 +33,22 @@ test('rewrite markdown links', function (t) {
 
 test('site generation', function (t) {
   var opts = {
-    root: path.join(__dirname, 'markdown'),
+    source: path.join(__dirname, 'markdown'),
+    build: path.join(__dirname, 'site'),
     header: '<blink>w00t</blink>',
     footer: '<marquee>THE END</marquee>',
-    output: path.join(__dirname, 'site'),
     silent: true
   }
 
-  rimraf(opts.output, generateSite)
+  rimraf(opts.build, generateSite)
 
   function generateSite () {
     sitedown(opts, function (err) {
       t.error(err, 'ran without errors')
 
-      var index = fs.readFileSync(path.join(opts.output, 'index.html'), enc)
-      var rewrite = fs.readFileSync(path.join(opts.output, 'rewrite.html'), enc)
-      var nested = fs.readFileSync(path.join(opts.output, 'nested', 'test.html'), enc)
+      var index = fs.readFileSync(path.join(opts.build, 'index.html'), enc)
+      var rewrite = fs.readFileSync(path.join(opts.build, 'rewrite.html'), enc)
+      var nested = fs.readFileSync(path.join(opts.build, 'nested', 'test.html'), enc)
 
       var nestedFile = path.join(__dirname, 'markdown', 'nested', 'test.md')
       var nestedHtml = sitedown.fileToPageBody(nestedFile)
@@ -62,7 +62,7 @@ test('site generation', function (t) {
       t.ok(nested, 'generated nested file exists')
       t.equals(nested, opts.header + nestedHtml + opts.footer, 'rewrite file looks okay')
 
-      rimraf(opts.output, function (err) {
+      rimraf(opts.build, function (err) {
         t.error(err, 'cleanup')
         t.end()
       })

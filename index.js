@@ -16,23 +16,21 @@ function noop () {}
 /**
  * Generate a static HTML site from a collection of markdown files.
  *
- * @param  {Object}   options  root, header, footer, output, silent
+ * @param  {Object}   options  source, build, header, footer, silent
  * @param  {Function} callback
  */
 function sitedown (options, callback) {
   options = options || {}
-  options.root = options.root || cwp('.')
-  options.header = options.header || ''
-  options.footer = options.footer || ''
-  options.output = options.output || cwp('./site/')
+  options.source = options.source || cwp('.')
+  options.build = options.build || cwp('./build/')
   options.files = []
 
   if (typeof callback === 'undefined') callback = noop
 
   readdirp({
-    root: options.root,
+    root: options.source,
     fileFilter: ['*.md', '*.markdown'],
-    directoryFilter: ['!.git', '!node_modules']
+    directoryFilter: ['!.git', '!node_modules', '!' + options.build]
   })
     .on('warn', function (err) {
       console.error('warning', err)
@@ -41,7 +39,7 @@ function sitedown (options, callback) {
       callback(err)
     })
     .pipe(es.mapSync(function (entry) {
-      return entry.path
+      return entry.source
     }))
     .on('data', function (file) {
       options.files.push(file)
@@ -86,6 +84,11 @@ function buildPage (header, body, footer) {
  * @param  {Function} callback
  */
 function generateSite (opt, callback) {
+  var header = ''
+  var footer = ''
+  if (opt.header) header = fs.readFileSync(opt.header, encoding)
+  if (opt.footer) footer = fs.readFileSync(opt.footer, encoding)
+
   opt.files.forEach(function (file) {
     var parsedFile = path.parse(file)
 
@@ -95,14 +98,14 @@ function generateSite (opt, callback) {
     parsedFile.ext = '.html'
 
     var dest = path.format(parsedFile)
-    var pageBody = fileToPageBody(path.join(opt.root, file))
-    var html = buildPage(opt.header, pageBody, opt.footer)
+    var pageBody = fileToPageBody(path.join(opt.source, file))
+    var html = buildPage(header, pageBody, footer)
 
-    mkdirp.sync(path.join(opt.output, parsedFile.dir))
+    mkdirp.sync(path.join(opt.build, parsedFile.dir))
 
-    fs.writeFileSync(path.join(opt.output, dest), html, encoding)
+    fs.writeFileSync(path.join(opt.build, dest), html, encoding)
 
-    if (!opt.silent) console.log('built', dest)
+    if (!opt.silent) console.log('√ built', dest)
   })
 
   callback(null)
