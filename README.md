@@ -20,6 +20,40 @@ npm install sitedown -g
 
 ## Usage
 
+Given a directory like this:
+
+```
+.
+|____.gitignore
+|____.travis.yml
+|____bin.js
+|____CHANGELOG.md
+|____CONTRIBUTING.md
+|____index.js
+|____LICENSE.md
+|____package.json
+|____README.md
+|____test/
+  |____index.js
+  |____markdown/
+    |____README.md
+```
+
+This program will produce a directory like this:
+
+```
+.
+|____CHANGELOG.html
+|____CONTRIBUTING.html
+|____index.html
+|____LICENSE.html
+|____test/
+  |____markdown/
+    |____index.html
+```
+
+`README.md` files are turned into indexes (`index.html`) and links that point to markdown files (`.md`, `.markdown`) are rewritten to point to their `.html` equivalent.
+
 ### CLI
 
 ```
