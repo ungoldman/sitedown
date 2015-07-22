@@ -47,6 +47,12 @@ if (argv.help) {
   process.exit(0)
 }
 
-if (argv._[0]) argv.source = argv._[0]
+var opts = {}
 
-sitedown()
+if (argv._[0]) opts.source = argv._[0]
+if (argv.build) opts.build = argv.build
+if (argv.header) opts.header = argv.header
+if (argv.footer) opts.footer = argv.footer
+if (argv.silent) opts.silent = argv.silent
+
+sitedown(opts)
