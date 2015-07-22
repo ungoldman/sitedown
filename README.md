@@ -66,10 +66,11 @@ $ sitedown
 var sitedown = require('sitedown')
 
 var options = {
-  root: '.'         // source directory (defaults to cwd)
-  header: '',       // path to header partial (defaults to '')
-  footer: '',       // path to footer partial (defaults to '')
-  output: './site/' // path to output folder  (defaults to 'site' in cwd)
+  root: '.'           // source directory               default: cwd
+  header: '',         // path to header partial         default: ''
+  footer: '',         // path to footer partial         default: ''
+  output: './site/',  // path to output folder          default: 'site' in cwd
+  silent: false       // make less noise during build   default: false
 }
 
 sitedown(options, function (err) {
