@@ -15,7 +15,7 @@
 ## Install
 
 ```
-npm install sitedown -g
+npm install sitedown
 ```
 
 ## Usage
