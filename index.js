@@ -105,7 +105,7 @@ function generateSite (opt, callback) {
 
     fs.writeFileSync(path.join(opt.build, dest), html, encoding)
 
-    if (!opt.silent) console.log('√ built', dest)
+    if (!opt.silent) console.log('✓ built', dest)
   })
 
   callback(null)
