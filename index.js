@@ -13,6 +13,12 @@ var encoding = { encoding: 'utf8' }
 
 function noop () {}
 
+/**
+ * Generate a static HTML site from a collection of markdown files.
+ *
+ * @param  {Object}   options  root, header, footer, output, silent
+ * @param  {Function} callback
+ */
 function sitedown (options, callback) {
   options = options || {}
   var root = options.root || cwp('.')
@@ -28,7 +34,7 @@ function sitedown (options, callback) {
     directoryFilter: ['!.git', '!node_modules']
   })
     .on('warn', function (err) {
-      console.error('non-fatal error', err)
+      console.error('warning', err)
     })
     .on('error', function (err) {
       callback(err)
@@ -38,15 +44,17 @@ function sitedown (options, callback) {
     }))
     .on('data', function (file) {
       var parsedFile = path.parse(file)
+
       if (parsedFile.name === 'README') parsedFile.name = 'index'
+
       parsedFile.base = parsedFile.name + '.html'
+      parsedFile.ext = '.html'
 
       var dest = path.format(parsedFile)
-
       var pageBody = fileToPageBody(path.join(root, file))
       var html = buildPage(header, pageBody, footer)
 
-      mkdirp.sync(output)
+      mkdirp.sync(path.join(output, parsedFile.dir))
 
       fs.writeFile(path.join(output, dest), html, encoding, function (err) {
         if (err) return console.error(err)
@@ -59,9 +67,10 @@ function sitedown (options, callback) {
 }
 
 /**
- * turns markdown file into html
- * @param  {String}  filePath   full path to markdown file
- * @return {Object}             html
+ * Turns markdown file into HTML.
+ *
+ * @param  {String}  filePath full path to markdown file
+ * @return {String}           md file converted to html
  */
 function fileToPageBody (filePath) {
   var body = fs.readFileSync(filePath, encoding)
@@ -69,8 +78,13 @@ function fileToPageBody (filePath) {
 }
 
 /**
- * glues together html header, body, and footer
- * also rewrites markdown links to html links
+ * Glues together HTML header, body, and footer.
+ * Rewrites `.md` & `.markdown` links in body to `.html`.
+ *
+ * @param  {String} header HTML partial
+ * @param  {String} body   HTML partial
+ * @param  {String} footer HTML partial
+ * @return {String}
  */
 function buildPage (header, body, footer) {
   header = header || ''
