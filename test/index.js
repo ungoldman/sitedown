@@ -4,8 +4,8 @@ var rimraf = require('rimraf')
 var test = require('tape')
 var sitedown = require('../')
 var enc = { encoding: 'utf8' }
-var header = '<blink>w00t</blink>'
-var footer = '<marquee>THE END</marquee>'
+var header = '<blink>w00t</blink>\n'
+var footer = '<marquee>THE END</marquee>\n'
 var generatedIndex = '<h1>TESTING!</h1>\n'
 var generatedRewrite = '<p><a href="rewrite.html">rewrite me</a></p>\n'
 
@@ -58,10 +58,10 @@ test('site generation', function (t) {
       t.equals(index, header + generatedIndex + footer, 'concatenation working')
 
       t.ok(rewrite, 'generated link rewrite file exists')
-      t.equals(rewrite, opts.header + generatedRewrite + opts.footer, 'rewrite file looks okay')
+      t.equals(rewrite, header + generatedRewrite + footer, 'rewrite file looks okay')
 
       t.ok(nested, 'generated nested file exists')
-      t.equals(nested, opts.header + nestedHtml + opts.footer, 'rewrite file looks okay')
+      t.equals(nested, header + nestedHtml + footer, 'rewrite file looks okay')
 
       rimraf(opts.build, function (err) {
         t.error(err, 'cleanup')
