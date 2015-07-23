@@ -8,6 +8,9 @@ var header = '<blink>w00t</blink>\n'
 var footer = '<marquee>THE END</marquee>\n'
 var generatedIndex = '<h1>TESTING!</h1>\n'
 var generatedRewrite = '<p><a href="rewrite.html">rewrite me</a></p>\n'
+var generatedNoRewriteHttps = '<p><a href="https://github.com/ngoldman/sitedown/README.md">but not me!</a></p>\n'
+var generatedNoRewriteHttp = '<p><a href="http://github.com/ngoldman/sitedown/README.md">or me!</a></p>\n'
+var generatedRewriteHttpfooMd = '<p><a href="httpfoo.html">rewrite</a></p>\n'
 
 test('markdown to html', function (t) {
   var file = path.join(__dirname, 'markdown', 'README.md')
@@ -29,6 +32,30 @@ test('rewrite markdown links', function (t) {
   var body = sitedown.fileToPageBody(file)
   var html = sitedown.buildPage('', body, '')
   t.equals(html, generatedRewrite, 'markdown link got rewritten')
+  t.end()
+})
+
+test('rewrite markdown links starting named http', function (t) {
+  var file = path.join(__dirname, 'markdown', 'rewritehttpfoo.md')
+  var body = sitedown.fileToPageBody(file)
+  var html = sitedown.buildPage('', body, '')
+  t.equals(html, generatedRewriteHttpfooMd, 'markdown link httpfoo.md got rewritten')
+  t.end()
+})
+
+test('do not rewrite https links to md', function (t) {
+  var file = path.join(__dirname, 'markdown', 'norewritehttps.md')
+  var body = sitedown.fileToPageBody(file)
+  var html = sitedown.buildPage('', body, '')
+  t.equals(html, generatedNoRewriteHttps, 'https hyperlink did not get rewritten')
+  t.end()
+})
+
+test('do not rewrite http links to md', function (t) {
+  var file = path.join(__dirname, 'markdown', 'norewritehttp.md')
+  var body = sitedown.fileToPageBody(file)
+  var html = sitedown.buildPage('', body, '')
+  t.equals(html, generatedNoRewriteHttp, 'http hyperlink did not get rewritten')
   t.end()
 })
 
