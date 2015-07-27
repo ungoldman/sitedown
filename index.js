@@ -9,6 +9,8 @@ var md = require('markdown-it')({
   linkify: true,
   typographer: true
 })
+md.use(require('markdown-it-highlightjs'))
+
 var encoding = { encoding: 'utf8' }
 
 function noop () {}
