@@ -73,7 +73,7 @@ function fileToPageBody (filePath) {
  */
 function buildPage (header, body, footer) {
   header = header || ''
-  body = body ? body.replace(/(\.md|\.markdown)"/g, '.html"') : ''
+  body = body ? body.replace(/(href="(?!http[s]*\:).*)(\.md|\.markdown)"/g, '$1.html"') : ''
   footer = footer || ''
 
   return header + body + footer
