@@ -7,8 +7,8 @@
 
 [npm-image]: https://img.shields.io/npm/v/sitedown.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/sitedown
-[travis-image]: https://img.shields.io/travis/ngoldman/sitedown.svg?style=flat-square
-[travis-url]: https://travis-ci.org/ngoldman/sitedown
+[travis-image]: https://img.shields.io/travis/ungoldman/sitedown.svg?style=flat-square
+[travis-url]: https://travis-ci.org/ungoldman/sitedown
 
 ## Install
 
