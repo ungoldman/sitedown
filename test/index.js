@@ -10,8 +10,8 @@ var footer = '<marquee>THE END</marquee></html>'
 var layout = header + '<body><div class="markdown-body"></div></body>' + footer
 var generatedIndex = '<h1>TESTING!</h1>'
 var generatedRewrite = '<p><a href="rewrite.html">rewrite me</a></p>'
-var generatedNoRewriteHttps = '<p><a href="https://github.com/ngoldman/sitedown/README.md">but not me!</a></p>'
-var generatedNoRewriteHttp = '<p><a href="http://github.com/ngoldman/sitedown/README.md">or me!</a></p>'
+var generatedNoRewriteHttps = '<p><a href="https://github.com/ungoldman/sitedown/README.md">but not me!</a></p>'
+var generatedNoRewriteHttp = '<p><a href="http://github.com/ungoldman/sitedown/README.md">or me!</a></p>'
 var generatedRewriteHttpfooMd = '<p><a href="httpfoo.html">rewrite</a></p>'
 
 test('markdown to html', function (t) {

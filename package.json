@@ -2,12 +2,12 @@
   "name": "sitedown",
   "description": "Generate a static HTML site from a collection of markdown files.",
   "version": "1.1.0",
-  "author": "Nate Goldman <nate@ngoldman.me>",
+  "author": "Nate Goldman <ungoldman@gmail.com>",
   "bin": {
     "sitedown": "./bin.js"
   },
   "bugs": {
-    "url": "https://github.com/ngoldman/sitedown/issues"
+    "url": "https://github.com/ungoldman/sitedown/issues"
   },
   "dependencies": {
     "cheerio": "^0.20.0",
@@ -26,7 +26,7 @@
     "tap-spec": "^4.0.2",
     "tape": "^4.0.0"
   },
-  "homepage": "https://github.com/ngoldman/sitedown",
+  "homepage": "https://github.com/ungoldman/sitedown",
   "keywords": [
     "generator",
     "markdown",
@@ -38,7 +38,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ngoldman/sitedown.git"
+    "url": "https://github.com/ungoldman/sitedown.git"
   },
   "scripts": {
     "test": "standard && tape test/*.js | tap-spec"
