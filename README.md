@@ -13,7 +13,7 @@
 ## Install
 
 ```
-npm install sitedown
+npm install -g sitedown
 ```
 
 ## Usage
