@@ -4,6 +4,7 @@ var cwp = require('cwp')
 var readdirp = require('readdirp')
 var mkdirp = require('mkdirp')
 var es = require('event-stream')
+var cheerio = require('cheerio')
 var md = require('markdown-it')({
   html: true,
   linkify: true,
@@ -18,13 +19,14 @@ function noop () {}
 /**
  * Generate a static HTML site from a collection of markdown files.
  *
- * @param  {Object}   options  source, build, header, footer, silent
+ * @param  {Object}   options   source, build, layout, silent
  * @param  {Function} callback
  */
 function sitedown (options, callback) {
   options = options || {}
   options.source = options.source || cwp('.')
-  options.build = options.build || cwp('./build/')
+  options.build = options.build || cwp('build')
+  options.layout = options.layout ? path.resolve(process.cwd(), options.layout) : path.join(__dirname, 'layout.html')
   options.files = []
 
   if (typeof callback === 'undefined') callback = noop
@@ -57,63 +59,65 @@ function sitedown (options, callback) {
  * @param  {String}  filePath full path to markdown file
  * @return {String}           md file converted to html
  */
-function fileToPageBody (filePath) {
+function mdToHtml (filePath) {
   var body = fs.readFileSync(filePath, encoding)
   return md.render(body)
 }
 
 /**
- * Glues together HTML header, body, and footer.
- * Rewrites `.md` & `.markdown` links in body to `.html`.
+ * Injects title and body into HTML layout.
+ * Title goes into `title` element, body goes into `.markdown-body` element.
+ * Rewrites relative `$1.md` and `$1.markdown` links in body to `$1/index.html`.
  *
- * @param  {String} header HTML partial
- * @param  {String} body   HTML partial
- * @param  {String} footer HTML partial
+ * @param  {String} title
+ * @param  {String} body
+ * @param  {String} layout
  * @return {String}
  */
-function buildPage (header, body, footer) {
-  header = header || ''
-  body = body ? body.replace(/(href="(?!http[s]*\:).*)(\.md|\.markdown)"/g, '$1.html"') : ''
-  footer = footer || ''
+function buildPage (title, body, layout) {
+  body = body ? body.replace(/(href="(?!http[s]*\:).*)(\.md|\.markdown)"/g, function () { console.log(arguments[1]); return arguments[1].toLowerCase() + '/"' }) : ''
+  var page = cheerio.load(layout)
 
-  return header + body + footer
+  page('title').text(title)
+  page('.markdown-body').html(body)
+
+  return page.html()
 }
 
 /**
  * Generates site from array of markdown file paths.
  *
- * @param  {Object}   opt      root, header, footer, output, silent, files
+ * @param  {Object}   opt       source, layout, output, silent, files
  * @param  {Function} callback
  */
 function generateSite (opt, callback) {
-  var header = ''
-  var footer = ''
-  if (opt.header) header = fs.readFileSync(opt.header, encoding)
-  if (opt.footer) footer = fs.readFileSync(opt.footer, encoding)
+  var layout = fs.readFileSync(opt.layout, encoding)
 
   opt.files.forEach(function (file) {
     var parsedFile = path.parse(file)
 
-    if (parsedFile.name === 'README') parsedFile.name = 'index'
+    if (parsedFile.name !== 'README') {
+      parsedFile.dir = path.join(parsedFile.dir, parsedFile.name.toLowerCase())
+    }
 
-    parsedFile.base = parsedFile.name + '.html'
+    parsedFile.name = 'index'
+    parsedFile.base = 'index.html'
     parsedFile.ext = '.html'
 
     var dest = path.format(parsedFile)
-    var pageBody = fileToPageBody(path.join(opt.source, file))
-    var html = buildPage(header, pageBody, footer)
+    var body = mdToHtml(path.join(opt.source, file))
+    var title = cheerio.load(body)('h1').text()
+    var html = buildPage(title, body, layout)
 
     mkdirp.sync(path.join(opt.build, parsedFile.dir))
-
     fs.writeFileSync(path.join(opt.build, dest), html, encoding)
-
     if (!opt.silent) console.log('✓ built', dest)
   })
 
   callback(null)
 }
 
-sitedown.fileToPageBody = fileToPageBody
+sitedown.mdToHtml = mdToHtml
 sitedown.buildPage = buildPage
 sitedown.generateSite = generateSite
 

@@ -5,15 +5,19 @@ var clopts = require('cliclopts')([
   {
     name: 'build',
     abbr: 'b',
-    help: 'path to build directory (default: "build" in current working directory)'
+    help: 'path to build directory',
+    default: 'build'
   },
   {
-    name: 'header',
-    help: 'path to header file'
+    name: 'layout',
+    abbr: 'l',
+    help: 'path to layout file'
   },
   {
-    name: 'footer',
-    help: 'path to footer file'
+    name: 'silent',
+    abbr: 's',
+    help: 'make less noise during build',
+    boolean: false
   },
   {
     name: 'version',
@@ -41,18 +45,15 @@ if (argv.version) {
 
 if (argv.help) {
   console.log('Usage: sitedown [source] [options]\n')
-  console.log('    Example: sitedown source_dir --build build_dir\n')
-  console.log('    [source]              path to source directory (default: current working directory)')
+  console.log('    Example: sitedown source/ -b build/ -l layout.html\n')
+  console.log('    source                path to source directory (default: current working directory)')
   clopts.print()
   process.exit(0)
 }
 
-var opts = {}
+argv.source = argv.source || argv._[0] || '.'
+argv.build = argv.build || 'build'
+argv.layout = argv.layout || 'layout.html'
+argv.silent = argv.silent || false
 
-if (argv._[0]) opts.source = argv._[0]
-if (argv.build) opts.build = argv.build
-if (argv.header) opts.header = argv.header
-if (argv.footer) opts.footer = argv.footer
-if (argv.silent) opts.silent = argv.silent
-
-sitedown(opts)
+sitedown(argv)

@@ -21,36 +21,56 @@ npm install sitedown
 Given a directory like this:
 
 ```
-.
-├── .gitignore
-├── .travis.yml
-├── bin.js
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── index.js
-├── LICENSE.md
-├── package.json
-├── README.md
-└── test/
-  ├── index.js
-  └── markdown/
-    └── README.md
+- .gitignore
+- .travis.yml
+- bin.js
+- CHANGELOG.md
+- CONTRIBUTING.md
+- index.js
+- LICENSE.md
+- package.json
+- README.md
++ test/
+  - index.js
+  + markdown/
+    - README.md
 ```
 
 This program will produce a directory like this:
 
 ```
-.
-├── CHANGELOG.html
-├── CONTRIBUTING.html
-├── index.html
-├── LICENSE.html
-└── test/
-  └── markdown/
-    └── index.html
+- index.html
++ changelog
+  - index.html
++ contributing
+  - index.html
++ license
+  - index.html
++ test/
+  + markdown/
+    - index.html
 ```
 
-`README.md` files are turned into indexes (`index.html`) and links that point to markdown files (`.md`, `.markdown`) are rewritten to point to their `.html` equivalent.
+- markdown files (`$f.md`, `$f.markdown`) are parsed into `$f/index.html` files
+- `README.md` files are converted to directory indexes (`index.html`)
+- relative links that point to markdown files (`$f.md`, `$f.markdown`) are rewritten as `$f/` to point to their `$f/index.html` equivalent.
+
+All files can be wrapped in an optional `layout.html` file. Markdown content is injected into the first `.markdown-body` element, and the text of the first `h1` is injected into `title`.
+
+The default layout is:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <div class="markdown-body"></div>
+</body>
+</html>
+```
 
 ### CLI
 
@@ -58,14 +78,13 @@ This program will produce a directory like this:
 $ sitedown --help
 Usage: sitedown [source] [options]
 
-    Example: sitedown source_dir --build build_dir
+    Example: sitedown source/ -b build/ -l layout.html
 
     [source]              path to source directory (default: current working directory)
-    --build, -b           path to build directory (default: "build" in current working directory)
-    --header              path to header file
-    --footer              path to footer file
-    --version, -v         show version information
-    --help, -h            show help
+    -b --build            path to build directory (default: "build" in current working directory)
+    -l --layout           path to layout file
+    -v, --version         show version information
+    -h, --help            show help
 ```
 
 ### Node API
@@ -74,11 +93,10 @@ Usage: sitedown [source] [options]
 var sitedown = require('sitedown')
 
 var options = {
-  source: '.',                        // path to source directory       default: cwd
-  build: './build/',                  // path to build directory        default: 'build' in cwd
-  header: './partials/header.html',   // path to header partial         default: none
-  footer: './partials/footer.html',   // path to footer partial         default: none
-  silent: false                       // make less noise during build   default: false
+  source: '.',            // path to source directory       default: cwd
+  build: 'build',         // path to build directory        default: 'build' in cwd
+  layout: 'layout.html',  // path to layout                 default: none
+  silent: false           // make less noise during build   default: false
 }
 
 sitedown(options, function (err) {

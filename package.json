@@ -10,6 +10,7 @@
     "url": "https://github.com/ngoldman/sitedown/issues"
   },
   "dependencies": {
+    "cheerio": "^0.20.0",
     "cliclopts": "^1.1.1",
     "cwp": "^1.0.0",
     "event-stream": "^3.3.1",
