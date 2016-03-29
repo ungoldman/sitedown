@@ -53,7 +53,12 @@ if (argv.help) {
 
 argv.source = argv.source || argv._[0] || '.'
 argv.build = argv.build || 'build'
-argv.layout = argv.layout || 'layout.html'
+argv.layout = argv.layout
 argv.silent = argv.silent || false
 
-sitedown(argv)
+try {
+  sitedown(argv)
+} catch (e) {
+  console.error(e.message)
+  process.exit(1)
+}
