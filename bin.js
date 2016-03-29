@@ -53,7 +53,6 @@ if (argv.help) {
 
 argv.source = argv.source || argv._[0] || '.'
 argv.build = argv.build || 'build'
-argv.layout = argv.layout
 argv.silent = argv.silent || false
 
 try {
