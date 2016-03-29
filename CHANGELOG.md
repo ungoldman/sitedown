@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+- bug: ensure default layout is used if layout.html does not exist in cwd
+
 ## [2.0.0]
 - breaking: use pretty URLs (`$f.md` converts to `$f/index.html` instead of `$f.html`)
 - breaking: rename `sitedown.fileToPageBody` to `sitedown.mdToHtml`
