@@ -4,15 +4,12 @@ var rimraf = require('rimraf')
 var test = require('tape')
 var sitedown = require('../')
 var enc = { encoding: 'utf8' }
-var header = '<html><head><title>woot</title></head>'
-var headerWithTitle = '<html><head><title>w00t</title></head>'
-var footer = '<marquee>THE END</marquee></html>'
-var layout = header + '<body><div class="markdown-body"></div></body>' + footer
-var generatedIndex = '<h1>TESTING!</h1>'
-var generatedRewrite = '<p><a href="rewrite.html">rewrite me</a></p>'
-var generatedNoRewriteHttps = '<p><a href="https://github.com/ungoldman/sitedown/README.md">but not me!</a></p>'
-var generatedNoRewriteHttp = '<p><a href="http://github.com/ungoldman/sitedown/README.md">or me!</a></p>'
-var generatedRewriteHttpfooMd = '<p><a href="httpfoo.html">rewrite</a></p>'
+var layout = '<title></title><div class="markdown-body"></div>'
+var generatedIndex = '<h1>TESTING!</h1>\n'
+var generatedRewrite = '<title></title><div class="markdown-body"><p><a href="rewrite/">rewrite me</a></p>\n</div>'
+var generatedNoRewriteHttps = '<title></title><div class="markdown-body"><p><a href="https://github.com/ungoldman/sitedown/README.md">but not me!</a></p>\n</div>'
+var generatedNoRewriteHttp = '<title></title><div class="markdown-body"><p><a href="http://github.com/ungoldman/sitedown/README.md">or me!</a></p>\n</div>'
+var generatedRewriteHttpfooMd = '<title></title><div class="markdown-body"><p><a href="httpfoo/">rewrite</a></p>\n</div>'
 
 test('markdown to html', function (t) {
   var file = path.join(__dirname, 'markdown', 'README.md')
@@ -25,14 +22,14 @@ test('injecting body into layout', function (t) {
   var file = path.join(__dirname, 'markdown', 'README.md')
   var body = sitedown.mdToHtml(file)
   var html = sitedown.buildPage('w00t', body, layout)
-  t.equals(html, headerWithTitle + '<body><div class="markdown-body">' + generatedIndex + '</div></body>' + footer, 'header, content, & footer are there')
+  t.equals(html, '<title>w00t</title><div class="markdown-body">' + generatedIndex + '</div>', 'header, content, & footer are there')
   t.end()
 })
 
 test('rewrite markdown links', function (t) {
   var file = path.join(__dirname, 'markdown', 'rewrite.md')
   var body = sitedown.mdToHtml(file)
-  var html = sitedown.buildPage('', body, '')
+  var html = sitedown.buildPage('', body, layout)
   t.equals(html, generatedRewrite, 'markdown link got rewritten')
   t.end()
 })
@@ -40,7 +37,7 @@ test('rewrite markdown links', function (t) {
 test('rewrite markdown links starting named http', function (t) {
   var file = path.join(__dirname, 'markdown', 'rewritehttpfoo.md')
   var body = sitedown.mdToHtml(file)
-  var html = sitedown.buildPage('', body, '')
+  var html = sitedown.buildPage('', body, layout)
   t.equals(html, generatedRewriteHttpfooMd, 'markdown link httpfoo.md got rewritten')
   t.end()
 })
@@ -48,7 +45,7 @@ test('rewrite markdown links starting named http', function (t) {
 test('do not rewrite https links to md', function (t) {
   var file = path.join(__dirname, 'markdown', 'norewritehttps.md')
   var body = sitedown.mdToHtml(file)
-  var html = sitedown.buildPage('', body, '')
+  var html = sitedown.buildPage('', body, layout)
   t.equals(html, generatedNoRewriteHttps, 'https hyperlink did not get rewritten')
   t.end()
 })
@@ -56,12 +53,12 @@ test('do not rewrite https links to md', function (t) {
 test('do not rewrite http links to md', function (t) {
   var file = path.join(__dirname, 'markdown', 'norewritehttp.md')
   var body = sitedown.mdToHtml(file)
-  var html = sitedown.buildPage('', body, '')
+  var html = sitedown.buildPage('', body, layout)
   t.equals(html, generatedNoRewriteHttp, 'http hyperlink did not get rewritten')
   t.end()
 })
 
-test.only('site generation', function (t) {
+test('site generation', function (t) {
   var opts = {
     source: path.join(__dirname, 'markdown'),
     build: path.join(__dirname, 'build'),
