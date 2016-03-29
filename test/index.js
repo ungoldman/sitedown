@@ -95,3 +95,32 @@ test.only('site generation', function (t) {
     })
   }
 })
+
+test('site generation - callback with error if options.layout file does not exist', function (t) {
+  var opts = {
+    source: path.join(__dirname, 'markdown'),
+    build: path.join(__dirname, 'build'),
+    layout: 'nope',
+    silent: true
+  }
+
+  sitedown(opts, function (err) {
+    t.ok(err.message.match('layout file not found'), 'callback with error when layout is not found')
+    t.end()
+  })
+})
+
+test('site generation - throws error if options.layout file does not exist and no callback passed', function (t) {
+  var opts = {
+    source: path.join(__dirname, 'markdown'),
+    build: path.join(__dirname, 'build'),
+    layout: 'nope',
+    silent: true
+  }
+
+  sitedown(opts, function (err) {
+    t.ok(err.message.match('layout file not found'), 'throws an error when layout is not found')
+    t.end()
+  })
+})
+

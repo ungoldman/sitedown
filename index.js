@@ -12,6 +12,7 @@ var md = require('markdown-it')({
 })
 md.use(require('markdown-it-highlightjs'))
 
+var defaultLayout = path.join(__dirname, 'layout.html')
 var encoding = { encoding: 'utf8' }
 
 function noop () {}
@@ -26,10 +27,16 @@ function sitedown (options, callback) {
   options = options || {}
   options.source = options.source || cwp('.')
   options.build = options.build || cwp('build')
-  options.layout = options.layout ? path.resolve(process.cwd(), options.layout) : path.join(__dirname, 'layout.html')
+  options.layout = options.layout ? path.resolve(process.cwd(), options.layout) : defaultLayout
   options.files = []
 
   if (typeof callback === 'undefined') callback = noop
+
+  if (!fs.existsSync(options.layout)) {
+    var error = new Error('layout file not found: ' + options.layout)
+    if (callback === noop) throw error
+    return callback(error)
+  }
 
   readdirp({
     root: options.source,
