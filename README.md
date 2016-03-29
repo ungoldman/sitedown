@@ -40,22 +40,22 @@ This program will produce a directory like this:
 
 ```
 - index.html
-+ changelog
++ changelog/
   - index.html
-+ contributing
++ contributing/
   - index.html
-+ license
++ license/
   - index.html
 + test/
   + markdown/
     - index.html
 ```
 
-- markdown files (`$f.md`, `$f.markdown`) are parsed into `$f/index.html` files
+- markdown files (`$f.md`, `$f.markdown`) are lowercased and parsed into `$f/index.html` files
 - `README.md` files are converted to directory indexes (`index.html`)
-- relative links that point to markdown files (`$f.md`, `$f.markdown`) are rewritten as `$f/` to point to their `$f/index.html` equivalent.
+- relative links that point to markdown files (`$f.md`, `$f.markdown`) are rewritten as `$f/` to point to their `$f/index.html` equivalent
 
-All files can be wrapped in an optional `layout.html` file. Markdown content is injected into the first `.markdown-body` element, and the text of the first `h1` is injected into `title`.
+All files are wrapped in a `layout.html` file. Markdown content is injected into the first `.markdown-body` element, and the text of the first `h1` is injected into `title`.
 
 The default layout is:
 
