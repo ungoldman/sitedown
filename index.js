@@ -28,6 +28,8 @@ function sitedown (options, callback) {
   options.source = options.source || cwp('.')
   options.build = options.build || cwp('build')
   options.layout = options.layout ? path.resolve(process.cwd(), options.layout) : defaultLayout
+  // pretty defaults to true unless explicitly set to false
+  options.pretty = options.pretty !== false
   options.files = []
 
   if (typeof callback === 'undefined') callback = noop
@@ -104,13 +106,21 @@ function generateSite (opt, callback) {
     var parsedFile = path.parse(file)
     var name = parsedFile.name.toLowerCase()
 
-    if (name !== 'readme') {
-      parsedFile.dir = path.join(parsedFile.dir, name)
-    }
-
-    parsedFile.name = 'index'
-    parsedFile.base = 'index.html'
     parsedFile.ext = '.html'
+
+    if (name === 'readme') {
+      parsedFile.name = 'index'
+      parsedFile.base = 'index.html'
+    } else {
+      if (opt.pretty) {
+        parsedFile.name = 'index'
+        parsedFile.base = 'index.html'
+        parsedFile.dir = path.join(parsedFile.dir, name)
+      } else {
+        parsedFile.name = name
+        parsedFile.base = name + '.html'
+      }
+    }
 
     var dest = path.format(parsedFile)
     var body = mdToHtml(path.join(opt.source, file))

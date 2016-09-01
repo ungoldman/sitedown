@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 - bugfix: allow lowercase readme
+- feature: allow disabling directory indexes (pretty: false)
 
 ## [2.0.1]
 - bugfix: ensure default layout is used if layout.html does not exist in cwd (#7)
