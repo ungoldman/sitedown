@@ -84,7 +84,7 @@ function mdToHtml (filePath) {
  * @return {String}
  */
 function buildPage (title, body, layout) {
-  body = body ? body.replace(/(href="(?!http[s]*\:).*)(\.md|\.markdown)"/g, function () { return arguments[1].toLowerCase() + '/"' }) : ''
+  body = body ? body.replace(/(href="(?!http[s]*:).*)(\.md|\.markdown)"/g, function () { return arguments[1].toLowerCase() + '/"' }) : ''
   var page = cheerio.load(layout)
 
   page('title').text(title)

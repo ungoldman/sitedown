@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "rimraf": "^2.4.2",
-    "standard": "*",
+    "standard": "^8.0.0",
     "tap-spec": "^4.0.2",
     "tape": "^4.0.0"
   },
