@@ -9,6 +9,12 @@ var clopts = require('cliclopts')([
     default: 'build'
   },
   {
+    name: 'pretty',
+    help: 'don\'t convert files to directory indexes for pretty URLs',
+    boolean: true,
+    default: true
+  },
+  {
     name: 'layout',
     abbr: 'l',
     help: 'path to layout file'
@@ -17,7 +23,7 @@ var clopts = require('cliclopts')([
     name: 'silent',
     abbr: 's',
     help: 'make less noise during build',
-    boolean: false
+    boolean: true
   },
   {
     name: 'version',
