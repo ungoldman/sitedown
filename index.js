@@ -102,9 +102,10 @@ function generateSite (opt, callback) {
 
   opt.files.forEach(function (file) {
     var parsedFile = path.parse(file)
+    var name = parsedFile.name.toLowerCase()
 
-    if (parsedFile.name !== 'README') {
-      parsedFile.dir = path.join(parsedFile.dir, parsedFile.name.toLowerCase())
+    if (name !== 'readme') {
+      parsedFile.dir = path.join(parsedFile.dir, name)
     }
 
     parsedFile.name = 'index'
