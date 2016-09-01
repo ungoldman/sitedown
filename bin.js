@@ -10,7 +10,7 @@ var clopts = require('cliclopts')([
   },
   {
     name: 'pretty',
-    help: 'don\'t convert files to directory indexes for pretty URLs',
+    help: 'use directory indexes for pretty URLs',
     boolean: true,
     default: true
   },

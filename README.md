@@ -80,11 +80,13 @@ Usage: sitedown [source] [options]
 
     Example: sitedown source/ -b build/ -l layout.html
 
-    [source]              path to source directory (default: current working directory)
-    -b --build            path to build directory (default: "build" in current working directory)
-    -l --layout           path to layout file
-    -v, --version         show version information
-    -h, --help            show help
+    source                path to source directory (default: current working directory)
+    --build, -b           path to build directory (default: "build")
+    --pretty              use directory indexes for pretty URLs (default: true)
+    --layout, -l          path to layout file
+    --silent, -s          make less noise during build
+    --version, -v         show version information
+    --help, -h            show help
 ```
 
 ### Node API
@@ -93,10 +95,11 @@ Usage: sitedown [source] [options]
 var sitedown = require('sitedown')
 
 var options = {
-  source: '.',            // path to source directory       default: cwd
-  build: 'build',         // path to build directory        default: 'build' in cwd
-  layout: 'layout.html',  // path to layout                 default: none
-  silent: false           // make less noise during build   default: false
+  source: '.',            // path to source directory               default: cwd
+  build: 'build',         // path to build directory                default: 'build' in cwd
+  pretty: true,           // use directory indexes for pretty URLs  default: true
+  layout: 'layout.html',  // path to layout                         default: none
+  silent: false           // make less noise during build           default: false
 }
 
 sitedown(options, function (err) {
