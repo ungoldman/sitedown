@@ -124,7 +124,7 @@ function generateSite (opt, callback) {
 
     var dest = path.format(parsedFile)
     var body = mdToHtml(path.join(opt.source, file))
-    var title = cheerio.load(body)('h1').text()
+    var title = cheerio.load(body)('h1').first().text()
     var html = buildPage(title, body, layout)
 
     mkdirp.sync(path.join(opt.build, parsedFile.dir))

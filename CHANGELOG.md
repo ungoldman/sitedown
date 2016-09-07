@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+- bugfix: only use text from first h1 for title
+
 ## [2.1.0]
 - bugfix: allow lowercase readme
 - feature: allow disabling directory indexes (pretty: false)
