@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## [2.1.1]
 - bugfix: only use text from first h1 for title
 
 ## [2.1.0]
@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0
 - engage
 
+[2.1.1]: https://github.com/ungoldman/sitedown/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/ungoldman/sitedown/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/ungoldman/sitedown/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/ungoldman/sitedown/compare/v1.1.0...v2.0.0
