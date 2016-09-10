@@ -76,7 +76,6 @@ function mdToHtml (filePath) {
 /**
  * Injects title and body into HTML layout.
  * Title goes into `title` element, body goes into `.markdown-body` element.
- * Rewrites relative `$1.md` and `$1.markdown` links in body to `$1/index.html`.
  *
  * @param  {String} title
  * @param  {String} body
@@ -84,7 +83,6 @@ function mdToHtml (filePath) {
  * @return {String}
  */
 function buildPage (title, body, layout) {
-  body = body ? body.replace(/(href="(?!http[s]*:).*)(\.md|\.markdown)"/g, function () { return arguments[1].toLowerCase() + '/"' }) : ''
   var page = cheerio.load(layout)
 
   page('title').text(title)
@@ -94,9 +92,34 @@ function buildPage (title, body, layout) {
 }
 
 /**
+  * Rewrites relative `$1.md` and `$1.markdown` links in body to `$1/index.html`.
+  * If pretty is false, rewrites `$1.md` to `$1.html`.
+  * `readme.md` is always rewritten to `index.html`.
+  *
+  * @param  {String} body
+  * @param  {Boolean} pretty
+  * @return {String}
+  */
+function rewriteLinks (body, pretty) {
+  body = body || ''
+
+  if (pretty !== false) pretty = true // default to true if omitted
+
+  var regex = /(href=")((?!http[s]*:).*)(\.md|\.markdown)"/g
+
+  return body.replace(regex, function (match, p1, p2, p3) {
+    var f = p2.toLowerCase()
+
+    if (f === 'readme') return p1 + '/"'
+    if (pretty) return p1 + f + '/"'
+    return p1 + f + '.html"'
+  })
+}
+
+/**
  * Generates site from array of markdown file paths.
  *
- * @param  {Object}   opt       source, layout, output, silent, files
+ * @param  {Object}   opt       source, layout, output, silent, files, pretty
  * @param  {Function} callback
  */
 function generateSite (opt, callback) {
@@ -123,7 +146,7 @@ function generateSite (opt, callback) {
     }
 
     var dest = path.format(parsedFile)
-    var body = mdToHtml(path.join(opt.source, file))
+    var body = rewriteLinks(mdToHtml(path.join(opt.source, file)), opt.pretty)
     var title = cheerio.load(body)('h1').first().text()
     var html = buildPage(title, body, layout)
 
@@ -137,6 +160,7 @@ function generateSite (opt, callback) {
 
 sitedown.mdToHtml = mdToHtml
 sitedown.buildPage = buildPage
+sitedown.rewriteLinks = rewriteLinks
 sitedown.generateSite = generateSite
 
 module.exports = sitedown
