@@ -3,9 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## [2.1.2]
 - bugfix: rewrite `/readme.md` links to `/`
 - bugfix: rewrite links correctly when `pretty: false` (e.g. `guide.md` -> `guide.html`)
+- ci: expand test coverage to node versions `4`, `5`, and `6`
 
 ## [2.1.1]
 - bugfix: only use text from first h1 for title
@@ -31,6 +32,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0
 - engage
 
+[2.1.2]: https://github.com/ungoldman/sitedown/compare/v2.1.2...v2.1.2
 [2.1.1]: https://github.com/ungoldman/sitedown/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/ungoldman/sitedown/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/ungoldman/sitedown/compare/v2.0.0...v2.0.1
