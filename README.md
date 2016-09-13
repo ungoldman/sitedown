@@ -77,7 +77,7 @@ The default layout is:
   <title></title>
 </head>
 <body>
-  <div class="markdown-body"></div>
+  <main class="markdown-body"></main>
 </body>
 </html>
 ```

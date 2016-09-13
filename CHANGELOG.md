@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+- use `<main>` instead of `<div>` for default layout (#13)
+
 ## [2.1.2]
 - bugfix: rewrite `/readme.md` links to `/`
 - bugfix: rewrite links correctly when `pretty: false` (e.g. `guide.md` -> `guide.html`)
