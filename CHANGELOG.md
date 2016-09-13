@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## [2.2.0]
 - use `<main>` instead of `<div>` for default layout (#13)
 - add barely acceptable watch option to cli (#9)
 
@@ -36,7 +36,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0
 - engage
 
-[2.1.2]: https://github.com/ungoldman/sitedown/compare/v2.1.2...v2.1.2
+[2.2.0]: https://github.com/ungoldman/sitedown/compare/v2.1.2...v2.2.0
+[2.1.2]: https://github.com/ungoldman/sitedown/compare/v2.1.1...v2.1.2
 [2.1.1]: https://github.com/ungoldman/sitedown/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/ungoldman/sitedown/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/ungoldman/sitedown/compare/v2.0.0...v2.0.1

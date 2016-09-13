@@ -1,7 +1,7 @@
 {
   "name": "sitedown",
   "description": "Generate a static HTML site from a collection of markdown files.",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "author": "Nate Goldman <ungoldman@gmail.com>",
   "bin": {
     "sitedown": "./bin.js"
