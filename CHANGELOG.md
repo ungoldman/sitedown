@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+- bugfix: add meta viewport to default layout
+
 ## [2.2.0]
 - use `<main>` instead of `<div>` for default layout (#13)
 - add barely acceptable watch option to cli (#9)
