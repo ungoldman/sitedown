@@ -38,6 +38,7 @@ Usage: sitedown [source] [options]
     --pretty              use directory indexes for pretty URLs (default: true)
     --layout, -l          path to layout file
     --silent, -s          make less noise during build
+    --watch, -w           watch a directory or file (experimental)
     --version, -v         show version information
     --help, -h            show help
 ```

@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 - use `<main>` instead of `<div>` for default layout (#13)
+- add barely acceptable watch option to cli (#9)
 
 ## [2.1.2]
 - bugfix: rewrite `/readme.md` links to `/`
