@@ -15,8 +15,16 @@
     "cwp": "^1.0.0",
     "event-stream": "^3.3.1",
     "gaze": "^1.1.1",
-    "markdown-it": "^4.3.0",
-    "markdown-it-highlightjs": "^2.0.0",
+    "highlight.js": "^9.6.0",
+    "markdown-it": "^8.0.0",
+    "markdown-it-abbr": "^1.0.4",
+    "markdown-it-deflist": "^2.0.1",
+    "markdown-it-emoji": "^1.2.0",
+    "markdown-it-footnote": "^3.0.1",
+    "markdown-it-ins": "^2.0.0",
+    "markdown-it-mark": "^2.0.0",
+    "markdown-it-sub": "^1.0.0",
+    "markdown-it-sup": "^1.0.0",
     "minimist": "^1.1.1",
     "mkdirp": "^0.5.1",
     "readdirp": "^1.3.0"
@@ -47,12 +55,15 @@
     "url": "https://github.com/ungoldman/sitedown.git"
   },
   "scripts": {
-    "gh-pages": "run-s site:* && gh-pages -d site",
+    "gh-pages": "npm run site && gh-pages -d site",
+    "pretest": "standard | snazzy",
+    "serve:site": "live-server site",
+    "serve:watch": "npm run site:html -- -w",
+    "site": "run-s site:*",
     "site:clean": "rm -rf site",
     "site:html": "./bin.js . -b site -l docs/layout.html",
     "site:style": "cp node_modules/style.css/style.css site/style.css",
-    "serve": "run-s site:* && live-server site",
-    "pretest": "standard | snazzy",
+    "start": "npm-run-all site --parallel serve:*",
     "test": "tape test/*.js | tap-spec"
   }
 }

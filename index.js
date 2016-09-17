@@ -5,12 +5,28 @@ var readdirp = require('readdirp')
 var mkdirp = require('mkdirp')
 var es = require('event-stream')
 var cheerio = require('cheerio')
+var hljs = require('highlight.js')
 var md = require('markdown-it')({
   html: true,
   linkify: true,
-  typographer: true
+  typographer: true,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value
+      } catch (e) {}
+    }
+    return '' // use external default escaping
+  }
 })
-md.use(require('markdown-it-highlightjs'))
+  .use(require('markdown-it-sub'))
+  .use(require('markdown-it-sup'))
+  .use(require('markdown-it-footnote'))
+  .use(require('markdown-it-deflist'))
+  .use(require('markdown-it-emoji'))
+  .use(require('markdown-it-ins'))
+  .use(require('markdown-it-mark'))
+  .use(require('markdown-it-abbr'))
 
 var defaultLayout = path.join(__dirname, 'layout.html')
 var encoding = { encoding: 'utf8' }
@@ -86,7 +102,7 @@ function buildPage (title, body, layout) {
   var page = cheerio.load(layout)
 
   page('title').text(title)
-  page('.markdown-body').html(body)
+  page('.markdown-body').append(body)
 
   return page.html()
 }

@@ -66,7 +66,7 @@ sitedown(options, function (err) {
 
 ### Layout
 
-All files are wrapped in a `layout.html` file. Markdown content is injected into the first `.markdown-body` element, and the text of the first `h1` is injected into `title`.
+All files are wrapped in a `layout.html` file. Markdown content is appended to the first `.markdown-body` element, and the page title (`<title>` in `<head>`) is set to the text of the first `h1` element.
 
 The default layout is:
 

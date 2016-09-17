@@ -6,6 +6,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 - bugfix: add meta viewport to default layout
 
+### Breaking Changes
+- append markdown html instead of overwriting `.markdown-body` element contents
+- update `markdown-it` to `^8.0.0`
+- use lots of `markdown-it` plugins and options
+  - [markdown-it-sub](https://github.com/markdown-it/markdown-it-sub)
+  - [markdown-it-sup](https://github.com/markdown-it/markdown-it-sup)
+  - [markdown-it-footnote](https://github.com/markdown-it/markdown-it-footnote)
+  - [markdown-it-deflist](https://github.com/markdown-it/markdown-it-deflist)
+  - [markdown-it-emoji](https://github.com/markdown-it/markdown-it-emoji)
+  - [markdown-it-ins](https://github.com/markdown-it/markdown-it-ins)
+  - [markdown-it-mark](https://github.com/markdown-it/markdown-it-mark)
+  - [markdown-it-abbr](https://github.com/markdown-it/markdown-it-abbr)
+  - switch from [markdown-it-highlightjs](https://github.com/valeriangalliat/markdown-it-highlightjs) to built-in `highlight` option
+  - use `typographer` option properly
+
 ## [2.2.0]
 - use `<main>` instead of `<div>` for default layout (#13)
 - add barely acceptable watch option to cli (#9)
