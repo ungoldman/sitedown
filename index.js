@@ -28,6 +28,9 @@ var md = require('markdown-it')({
   .use(require('markdown-it-mark'))
   .use(require('markdown-it-abbr'))
 
+// disable autolinking for filenames
+md.linkify.tlds('.md', false) // markdown
+
 var defaultLayout = path.join(__dirname, 'layout.html')
 var encoding = { encoding: 'utf8' }
 
