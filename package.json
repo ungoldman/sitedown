@@ -36,7 +36,6 @@
     "rimraf": "^2.4.2",
     "snazzy": "^5.0.0",
     "standard": "^8.0.0",
-    "style.css": "^1.0.0-alpha-1",
     "tap-spec": "^4.0.2",
     "tape": "^4.0.0"
   },
@@ -62,7 +61,6 @@
     "site": "run-s site:*",
     "site:clean": "rm -rf site",
     "site:html": "./bin.js . -b site -l docs/layout.html",
-    "site:style": "cp node_modules/style.css/style.css site/style.css",
     "start": "npm-run-all site --parallel serve:*",
     "test": "tape test/*.js | tap-spec"
   }
