@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>sitedown</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="markdown-body"><h1>sitedown</h1>
+<p>Generate a static HTML site from a collection of markdown files.</p>
+<p><a href="https://www.npmjs.com/package/sitedown"><img src="https://img.shields.io/npm/v/sitedown.svg?style=flat-square" alt="npm"></a>
+<a href="https://travis-ci.org/ungoldman/sitedown"><img src="https://img.shields.io/travis/ungoldman/sitedown.svg?style=flat-square" alt="travis"></a>
+<a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square" alt="standard"></a>
+<a href="https://www.npmjs.com/package/sitedown"><img src="https://img.shields.io/npm/dm/sitedown.svg?style=flat-square" alt="downloads"></a></p>
+<p>&#x2728;&#x1F4DD;&#x2728; <strong>Let&#x2019;s Make Markdown Great Again</strong> &#x2728;&#x1F4DD;&#x2728;</p>
+<h2>Install</h2>
+<pre><code>npm install sitedown
+</code></pre>
+<h2>Usage</h2>
+<h3>CLI</h3>
+<pre><code>$ sitedown --help
+Usage: sitedown [source] [options]
+
+    Example: sitedown source/ -b build/ -l layout.html
+
+    source                path to source directory (default: current working directory)
+    --build, -b           path to build directory (default: &quot;build&quot;)
+    --pretty              use directory indexes for pretty URLs (default: true)
+    --layout, -l          path to layout file
+    --silent, -s          make less noise during build
+    --watch, -w           watch a directory or file (experimental)
+    --version, -v         show version information
+    --help, -h            show help
+</code></pre>
+<p><strong>Protip</strong>: You <em>can</em> install a node command line utility globally (<code>npm install --global sitedown</code>), but it&#x2019;s usually <em>better</em> to install it locally (<code>npm install --save-dev sitedown</code>) and access it via <code>package.json</code> scripts (e.g. <code>&quot;build-site&quot;: &quot;sitedown . -b site/ -l layout.html&quot;</code>). This way you don&#x2019;t pollute the global environment with random scripts and your utility is saved and versioned side by side with your project. &#x2728;</p>
+<h3>Node API</h3>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> sitedown = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;sitedown&apos;</span>)
+
+<span class="hljs-keyword">var</span> options = {
+  source: <span class="hljs-string">&apos;.&apos;</span>,            <span class="hljs-comment">// path to source directory               default: cwd</span>
+  build: <span class="hljs-string">&apos;build&apos;</span>,         <span class="hljs-comment">// path to build directory                default: &apos;build&apos; in cwd</span>
+  pretty: <span class="hljs-literal">true</span>,           <span class="hljs-comment">// use directory indexes for pretty URLs  default: true</span>
+  layout: <span class="hljs-string">&apos;layout.html&apos;</span>,  <span class="hljs-comment">// path to layout                         default: none</span>
+  silent: <span class="hljs-literal">false</span>           <span class="hljs-comment">// make less noise during build           default: false</span>
+}
+
+sitedown(options, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
+  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.error(err)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;success&apos;</span>)
+})
+</code></pre>
+<h3>Layout</h3>
+<p>All files are wrapped in a <code>layout.html</code> file. Markdown content is appended to the first <code>.markdown-body</code> element, and the page title (<code>&lt;title&gt;</code> in <code>&lt;head&gt;</code>) is set to the text of the first <code>h1</code> element.</p>
+<p>The default layout is:</p>
+<pre><code class="language-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;markdown-body&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<h3>Directory indexes (pretty URLs)</h3>
+<p>Markdown files (<code>$f.md</code>, <code>$f.markdown</code>) are lowercased and parsed into <code>$f/index.html</code> files. Directory indexes can be disabled with the <code>pretty: false</code> option. <code>README.md</code> files are always converted to directory indexes (<code>index.html</code>).</p>
+<h3>Links</h3>
+<p>Relative links that point to markdown files (<code>$f.md</code>, <code>$f.markdown</code>) are rewritten as <code>$f/</code> to point to their <code>$f/index.html</code> equivalent.</p>
+<h3>Example</h3>
+<p>Given a directory like this:</p>
+<pre><code>- .gitignore
+- .travis.yml
+- bin.js
+- CHANGELOG.md
+- CONTRIBUTING.md
+- index.js
+- LICENSE.md
+- package.json
+- README.md
++ test/
+  - index.js
+  + markdown/
+    - README.md
+</code></pre>
+<p>Sitedown&#x2019;s default options will produce a directory like this:</p>
+<pre><code>- index.html
++ changelog/
+  - index.html
++ contributing/
+  - index.html
++ license/
+  - index.html
++ test/
+  + markdown/
+    - index.html
+</code></pre>
+<h2>Contributing</h2>
+<p>Contributions welcome! Please read the <a href="contributing/">contributing guidelines</a> first.</p>
+<h2>License</h2>
+<p><a href="license/">ISC</a></p>
+</main>
+</body>
+</html>

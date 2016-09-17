@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>sitedown change log</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="markdown-body"><h1>sitedown change log</h1>
+<p>All notable changes to this project will be documented in this file.
+This project adheres to <a href="http://semver.org/">Semantic Versioning</a>.</p>
+<h2>Unreleased</h2>
+<ul>
+<li>bugfix: add meta viewport to default layout</li>
+</ul>
+<h3>Breaking Changes</h3>
+<ul>
+<li>append markdown html instead of overwriting <code>.markdown-body</code> element contents</li>
+<li>update <code>markdown-it</code> to <code>^8.0.0</code></li>
+<li>use lots of <code>markdown-it</code> plugins and options
+<ul>
+<li><a href="https://github.com/markdown-it/markdown-it-sub">markdown-it-sub</a></li>
+<li><a href="https://github.com/markdown-it/markdown-it-sup">markdown-it-sup</a></li>
+<li><a href="https://github.com/markdown-it/markdown-it-footnote">markdown-it-footnote</a></li>
+<li><a href="https://github.com/markdown-it/markdown-it-deflist">markdown-it-deflist</a></li>
+<li><a href="https://github.com/markdown-it/markdown-it-emoji">markdown-it-emoji</a></li>
+<li><a href="https://github.com/markdown-it/markdown-it-ins">markdown-it-ins</a></li>
+<li><a href="https://github.com/markdown-it/markdown-it-mark">markdown-it-mark</a></li>
+<li><a href="https://github.com/markdown-it/markdown-it-abbr">markdown-it-abbr</a></li>
+<li>switch from <a href="https://github.com/valeriangalliat/markdown-it-highlightjs">markdown-it-highlightjs</a> to built-in <code>highlight</code> option</li>
+<li>use <code>typographer</code> option properly</li>
+</ul>
+</li>
+</ul>
+<h2><a href="https://github.com/ungoldman/sitedown/compare/v2.1.2...v2.2.0">2.2.0</a></h2>
+<ul>
+<li>use <code>&lt;main&gt;</code> instead of <code>&lt;div&gt;</code> for default layout (#13)</li>
+<li>add barely acceptable watch option to cli (#9)</li>
+</ul>
+<h2><a href="https://github.com/ungoldman/sitedown/compare/v2.1.1...v2.1.2">2.1.2</a></h2>
+<ul>
+<li>bugfix: rewrite <code>/readme.md</code> links to <code>/</code></li>
+<li>bugfix: rewrite links correctly when <code>pretty: false</code> (e.g. <code>guide.md</code> -&gt; <code>guide.html</code>)</li>
+<li>ci: expand test coverage to node versions <code>4</code>, <code>5</code>, and <code>6</code></li>
+</ul>
+<h2><a href="https://github.com/ungoldman/sitedown/compare/v2.1.0...v2.1.1">2.1.1</a></h2>
+<ul>
+<li>bugfix: only use text from first h1 for title</li>
+</ul>
+<h2><a href="https://github.com/ungoldman/sitedown/compare/v2.0.1...v2.1.0">2.1.0</a></h2>
+<ul>
+<li>bugfix: allow lowercase readme</li>
+<li>feature: allow disabling directory indexes (pretty: false)</li>
+</ul>
+<h2><a href="https://github.com/ungoldman/sitedown/compare/v2.0.0...v2.0.1">2.0.1</a></h2>
+<ul>
+<li>bugfix: ensure default layout is used if layout.html does not exist in cwd (#7)</li>
+</ul>
+<h2><a href="https://github.com/ungoldman/sitedown/compare/v1.1.0...v2.0.0">2.0.0</a></h2>
+<ul>
+<li>breaking: use pretty URLs (<code>$f.md</code> converts to <code>$f/index.html</code> instead of <code>$f.html</code>)</li>
+<li>breaking: rename <code>sitedown.fileToPageBody</code> to <code>sitedown.mdToHtml</code></li>
+<li>breaking: use single <code>layout.html</code> instead of <code>header.html</code> and <code>footer.html</code>
+<ul>
+<li>parsed markdown content is injected into <code>.markdown-body</code></li>
+<li>text from first <code>h1</code> is injected into <code>title</code></li>
+</ul>
+</li>
+</ul>
+<h2><a href="https://github.com/ungoldman/sitedown/compare/v1.0.0...v1.1.1">1.1.0</a></h2>
+<ul>
+<li>avoid rewriting external links to MDs (#3)</li>
+<li>generate CSS classes for highlightjs support (#4)</li>
+</ul>
+<h2>1.0.0</h2>
+<ul>
+<li>engage</li>
+</ul>
+</main>
+</body>
+</html>
