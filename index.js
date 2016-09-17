@@ -163,7 +163,7 @@ function generateSite (opt, callback) {
 
     var dest = path.format(parsedFile)
     var body = rewriteLinks(mdToHtml(path.join(opt.source, file)), opt.pretty)
-    var title = cheerio.load(body)('h1').first().text()
+    var title = cheerio.load(body)('h1').first().text().trim()
     var html = buildPage(title, body, layout)
 
     mkdirp.sync(path.join(opt.build, parsedFile.dir))
