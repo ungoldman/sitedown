@@ -3,8 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## [3.0.0](https://github.com/ungoldman/sitedown/releases/v3.0.0) - 2016-09-17
+
+[view diff](https://github.com/ungoldman/sitedown/compare/v2.2.0...v3.0.0)
+
+### Fixes
 - bugfix: add meta viewport to default layout
+- bugfix: trim whitespace in title text
 
 ### Breaking Changes
 - append markdown html instead of overwriting `.markdown-body` element contents
