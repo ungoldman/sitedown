@@ -15,6 +15,17 @@ Generate a static HTML site from a collection of markdown files.
 [standard-url]: http://standardjs.com/
 [downloads-image]: https://img.shields.io/npm/dm/sitedown.svg?style=flat-square
 
+## Overview
+
+Point sitedown at a directory with one or more markdown files and you will receive one free website!
+
+- converts your `README.md` into a `index.html`
+- creates directory indexes (`CHANGELOG.md` becomes `changelog/index.html`)
+- accepts a layout file (comes with a default one too)
+- has an experimental watch mode for working on a project locally
+- built for making gh-pages sites
+- supports subdirectories too
+
 :sparkles::memo::sparkles: **Let's Make Markdown Great Again** :sparkles::memo::sparkles:
 
 ## Install
