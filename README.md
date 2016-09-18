@@ -26,6 +26,8 @@ Point sitedown at a directory with one or more markdown files and you will recei
 - built for making gh-pages sites
 - supports subdirectories too
 
+Sitedown's [website](https://ungoldman.github.io/sitedown) was built with sitedown, so you know it's *for real*.
+
 :sparkles::memo::sparkles: **Let's Make Markdown Great Again** :sparkles::memo::sparkles:
 
 ## Install
