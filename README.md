@@ -17,7 +17,7 @@ Generate a static HTML site from a collection of markdown files.
 
 ## Overview
 
-Point sitedown at a directory with one or more markdown files and you will receive one free website!
+Point sitedown at a folder with one or more markdown files and receive one free website!
 
 - converts your `README.md` into a `index.html`
 - creates directory indexes (`CHANGELOG.md` becomes `changelog/index.html`)
