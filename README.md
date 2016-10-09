@@ -1,4 +1,4 @@
-# sitedown
+# [sitedown](https://github.com/ungoldman/sitedown/)
 
 Generate a static HTML site from a collection of markdown files.
 
