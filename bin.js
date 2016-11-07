@@ -67,31 +67,15 @@ argv.source = argv.source || argv._[0] || '.'
 argv.build = argv.build || 'build'
 argv.silent = argv.silent || false
 
-function watch () {
-  var gaze = require('gaze')
-  var path = require('path')
-  var source = path.resolve(argv.source)
-
-  gaze('**/*.md', { cwd: source }, function (err, watcher) {
-    if (err) console.error(err.message)
-
-    console.log('\nWatching ' + source + ' for changes...')
-
-    watcher.on('all', function (event, filepath) {
-      console.log('\n' + filepath + ' was ' + event + '\n')
-
-      sitedown(argv, function (err) {
-        if (err) return console.error(err.message)
-      })
-    })
+if (argv.watch) {
+  sitedown.watch(argv)
+} else {
+  sitedown(argv, function (err) {
+    if (err) {
+      console.error(err.message)
+      process.exit(1)
+    } else {
+      process.exit(0)
+    }
   })
 }
-
-sitedown(argv, function (err) {
-  if (err) {
-    console.error(err.message)
-    process.exit(1)
-  } else {
-    if (argv.watch) watch()
-  }
-})

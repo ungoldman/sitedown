@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+
+### Changes
+- expose `sitedown.watch` method
+
 ## [3.0.1](https://github.com/ungoldman/sitedown/releases/v3.0.1) - 2016-09-17
 
 [view diff](https://github.com/ungoldman/sitedown/compare/v3.0.0...v3.0.1)
