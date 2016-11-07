@@ -12,7 +12,6 @@
   "dependencies": {
     "cheerio": "^0.22.0",
     "cliclopts": "^1.1.1",
-    "cwp": "^1.0.0",
     "event-stream": "^3.3.1",
     "gaze": "^1.1.1",
     "highlight.js": "^9.6.0",

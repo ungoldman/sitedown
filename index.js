@@ -1,6 +1,5 @@
 var fs = require('fs')
 var path = require('path')
-var cwp = require('cwp')
 var readdirp = require('readdirp')
 var mkdirp = require('mkdirp')
 var es = require('event-stream')
@@ -44,8 +43,8 @@ function noop () {}
  */
 function sitedown (options, callback) {
   options = options || {}
-  options.source = options.source || cwp('.')
-  options.build = options.build || cwp('build')
+  options.source = options.source || path.resolve('.')
+  options.build = options.build || path.resolve('build')
   options.layout = options.layout ? path.resolve(process.cwd(), options.layout) : defaultLayout
   // pretty defaults to true unless explicitly set to false
   options.pretty = options.pretty !== false

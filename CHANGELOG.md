@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changes
 - expose `sitedown.watch` method
+- use `path.resolve` instead of `cwp`
 
 ## [3.0.1](https://github.com/ungoldman/sitedown/releases/v3.0.1) - 2016-09-17
 
