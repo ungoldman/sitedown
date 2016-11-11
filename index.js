@@ -184,11 +184,12 @@ function generateSite (opt, callback) {
 function watch (options) {
   var gaze = require('gaze')
   var source = path.resolve(options.source)
+  var layout = options.layout ? path.resolve(process.cwd(), options.layout) : defaultLayout
 
   sitedown(options, function (err) {
     if (err) return console.error(err.message)
 
-    gaze('**/*.md', { cwd: source }, function (err, watcher) {
+    gaze(['**/*.md', layout], { cwd: source }, function (err, watcher) {
       if (err) console.error(err.message)
 
       console.log('\nWatching ' + source + ' for changes...')
