@@ -7,19 +7,28 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://ungoldman.github.io/style.css/site.css">
   </head>
-  <body>
-    <div class="page serif">
-      <header class="top-bar">
-        <a class="top-bar-title" href="./">sitedown</a>
-        <div class="top-bar-right">
-          <a class="top-bar-link" href="https://github.com/ungoldman/sitedown/">
-            <i class="fa fa-github-alt"></i> github
-          </a>
-        </div>
-      </header>
-      <main class="markdown-body"><h1>sitedown change log</h1>
+  <body class="serif">
+    <nav class="top-bar">
+      <div class="top-bar-right">
+        <a class="top-bar-link" href="https://github.com/ungoldman/sitedown/">
+          <i class="fa fa-github-alt"></i> github
+        </a>
+      </div>
+    </nav>
+    <main class="markdown-body"><h1>sitedown change log</h1>
 <p>All notable changes to this project will be documented in this file.
 This project adheres to <a href="http://semver.org/">Semantic Versioning</a>.</p>
+<h2><a href="https://github.com/ungoldman/sitedown/releases/v3.1.0">3.1.0</a> - 2016-11-11</h2>
+<p><a href="https://github.com/ungoldman/sitedown/compare/v3.0.1...v3.1.0">view diff</a></p>
+<h3>Additions</h3>
+<ul>
+<li>add layout to watched files (#17)</li>
+<li>expose <code>sitedown.watch</code> method</li>
+</ul>
+<h3>Changes</h3>
+<ul>
+<li>use <code>path.resolve</code> instead of <code>cwp</code></li>
+</ul>
 <h2><a href="https://github.com/ungoldman/sitedown/releases/v3.0.1">3.0.1</a> - 2016-09-17</h2>
 <p><a href="https://github.com/ungoldman/sitedown/compare/v3.0.0...v3.0.1">view diff</a></p>
 <h3>Fixes</h3>
@@ -97,66 +106,8 @@ This project adheres to <a href="http://semver.org/">Semantic Versioning</a>.</p
 <li>engage</li>
 </ul>
 </main>
-      <nav class="nav">
-        <ul class="hamburger">
-          <li>
-            <a class="id">
-              <i class="fa fa-bars"></i> Nate Goldman
-            </a>
-          </li>
-        </ul>
-        <ul class="site">
-          <li>
-            <a class="home" href="http://ungoldman.com">
-              <i class="fa fa-home"></i> Home
-            </a>
-          </li>
-          <li>
-            <a class="contact" href="http://ungoldman.com/contact/">
-              <i class="fa fa-comment"></i> Contact
-            </a>
-          </li>
-          <li>
-            <a class="cv" href="http://ungoldman.com/cv/">
-              <i class="fa fa-file-text"></i> CV
-            </a>
-          </li>
-        </ul>
-        <ul class="external">
-          <li>
-            <a href="https://github.com/ungoldman">
-              <i class="fa fa-github-alt"></i> github
-            </a>
-          </li>
-          <li>
-            <a href="https://goodreads.com/ungoldman">
-              <i class="fa fa-book"></i> goodreads
-            </a>
-          </li>
-          <li>
-            <a href="https://soundcloud.com/nullghostman">
-              <i class="fa fa-soundcloud"></i> soundcloud
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/ungoldman">
-              <i class="fa fa-twitter"></i> twitter
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-    <script>
-      (function () {
-        var page = document.querySelector('.page')
-        var toggle = document.querySelector('.id')
-
-        function navOpen () {
-          page.classList.toggle('nav-open')
-        }
-
-        toggle.addEventListener('click', navOpen)
-      })()
-    </script>
+    <footer>
+      <a href="http://ungoldman.com/contact"><small><i class="fa fa-paper-plane" aria-hidden="true"></i></small></a>
+    </footer>
   </body>
 </html>
