@@ -128,8 +128,16 @@ function rewriteLinks (body, pretty) {
   return body.replace(regex, function (match, p1, p2, p3) {
     var f = p2.toLowerCase()
 
+    // root readme
     if (f === 'readme') return p1 + '/"'
+
+    // nested readme
+    if (f.match(/readme$/)) return p1 + f.replace(/readme$/, '') + '"'
+
+    // pretty url
     if (pretty) return p1 + f + '/"'
+
+    // default
     return p1 + f + '.html"'
   })
 }
