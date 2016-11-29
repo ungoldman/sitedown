@@ -28,8 +28,6 @@ Point sitedown at a folder with one or more markdown files and receive one free 
 
 Sitedown's [website](https://ungoldman.github.io/sitedown) was built with sitedown, so you know it's *for real*.
 
-:sparkles::memo::sparkles: **Let's Make Markdown Great Again** :sparkles::memo::sparkles:
-
 ## Install
 
 ```
