@@ -9,8 +9,8 @@ Generate a static HTML site from a collection of markdown files.
 
 [npm-image]: https://img.shields.io/npm/v/sitedown.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/sitedown
-[travis-image]: https://img.shields.io/travis/ungoldman/sitedown.svg?style=flat-square
-[travis-url]: https://travis-ci.org/ungoldman/sitedown
+[travis-image]: https://img.shields.io/travis/hypermodules/sitedown.svg?style=flat-square
+[travis-url]: https://travis-ci.org/hypermodules/sitedown
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [standard-url]: http://standardjs.com/
 [downloads-image]: https://img.shields.io/npm/dm/sitedown.svg?style=flat-square
@@ -26,7 +26,7 @@ Point sitedown at a folder with one or more markdown files and receive one free 
 - built for making gh-pages sites
 - supports subdirectories too
 
-Sitedown's [website](https://ungoldman.github.io/sitedown) was built with sitedown, so you know it's *for real*.
+Sitedown's [website](https://hypermodules.github.io/sitedown) was built with sitedown, so you know it's *for real*.
 
 ## Install
 
