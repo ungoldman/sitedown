@@ -1,5 +1,7 @@
 # sitedown
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/hypermodules/sitedown.svg)](https://greenkeeper.io/)
+
 Generate a static HTML site from a collection of markdown files.
 
 [![npm][npm-image]][npm-url]
