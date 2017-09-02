@@ -1,6 +1,6 @@
 # sitedown
 
-Generate a static HTML site from a collection of markdown files.
+Turn some markdown files into a website.
 
 [![npm][npm-image]][npm-url]
 [![travis][travis-image]][travis-url]
