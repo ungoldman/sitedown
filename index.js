@@ -38,7 +38,7 @@ function noop () {}
 /**
  * Generate a static HTML site from a collection of markdown files.
  *
- * @param  {Object}   options   source, build, layout, silent
+ * @param  {Object}   options - source, build, layout, silent
  * @param  {Function} callback
  */
 function sitedown (options, callback) {
@@ -48,6 +48,7 @@ function sitedown (options, callback) {
   options.layout = options.layout ? path.resolve(process.cwd(), options.layout) : defaultLayout
   // pretty defaults to true unless explicitly set to false
   options.pretty = options.pretty !== false
+  options.el = options.el || '.markdown-body'
   options.files = []
 
   if (typeof callback === 'undefined') callback = noop
@@ -83,8 +84,8 @@ function sitedown (options, callback) {
 /**
  * Turns markdown file into HTML.
  *
- * @param  {String}  filePath full path to markdown file
- * @return {String}           md file converted to html
+ * @param  {String} filePath - full path to markdown file
+ * @return {String} - md file converted to html
  */
 function mdToHtml (filePath) {
   var body = fs.readFileSync(filePath, encoding)
@@ -95,16 +96,18 @@ function mdToHtml (filePath) {
  * Injects title and body into HTML layout.
  * Title goes into `title` element, body goes into `.markdown-body` element.
  *
- * @param  {String} title
- * @param  {String} body
- * @param  {String} layout
+ * @param  {String} title - page title
+ * @param  {String} body - html content to inject into target
+ * @param  {String} layout - html layout file
+ * @param  {String?} el - CSS selector for target element
  * @return {String}
  */
-function buildPage (title, body, layout) {
+function buildPage (title, body, layout, el) {
   var page = cheerio.load(layout)
+  var target = el || '.markdown-body'
 
   page('title').text(title)
-  page('.markdown-body').append(body)
+  page(target).append(body)
 
   return page.html()
 }
@@ -114,8 +117,8 @@ function buildPage (title, body, layout) {
   * If pretty is false, rewrites `$1.md` to `$1.html`.
   * `readme.md` is always rewritten to `index.html`.
   *
-  * @param  {String} body
-  * @param  {Boolean} pretty
+  * @param  {String} body - html content to rewrite
+  * @param  {Boolean} pretty - rewrite links for pretty URLs (directory indexes)
   * @return {String}
   */
 function rewriteLinks (body, pretty) {
@@ -145,13 +148,13 @@ function rewriteLinks (body, pretty) {
 /**
  * Generates site from array of markdown file paths.
  *
- * @param  {Object}   opt       source, layout, output, silent, files, pretty
- * @param  {Function} callback
+ * @param {Object} options - source, layout, output, silent, files, pretty, el
+ * @param {Function} callback
  */
-function generateSite (opt, callback) {
-  var layout = fs.readFileSync(opt.layout, encoding)
+function generateSite (options, callback) {
+  var layout = fs.readFileSync(options.layout, encoding)
 
-  opt.files.forEach(function (file) {
+  options.files.forEach(function (file) {
     var parsedFile = path.parse(file)
     var name = parsedFile.name.toLowerCase()
 
@@ -161,7 +164,7 @@ function generateSite (opt, callback) {
       parsedFile.name = 'index'
       parsedFile.base = 'index.html'
     } else {
-      if (opt.pretty) {
+      if (options.pretty) {
         parsedFile.name = 'index'
         parsedFile.base = 'index.html'
         parsedFile.dir = path.join(parsedFile.dir, name)
@@ -172,13 +175,13 @@ function generateSite (opt, callback) {
     }
 
     var dest = path.format(parsedFile)
-    var body = rewriteLinks(mdToHtml(path.join(opt.source, file)), opt.pretty)
+    var body = rewriteLinks(mdToHtml(path.join(options.source, file)), options.pretty)
     var title = cheerio.load(body)('h1').first().text().trim()
-    var html = buildPage(title, body, layout)
+    var html = buildPage(title, body, layout, options.el)
 
-    mkdirp.sync(path.join(opt.build, parsedFile.dir))
-    fs.writeFileSync(path.join(opt.build, dest), html, encoding)
-    if (!opt.silent) console.log('✓ built', dest)
+    mkdirp.sync(path.join(options.build, parsedFile.dir))
+    fs.writeFileSync(path.join(options.build, dest), html, encoding)
+    if (!options.silent) console.log('✓ built', dest)
   })
 
   callback(null)
@@ -187,7 +190,7 @@ function generateSite (opt, callback) {
 /**
  * Run sitedown and watch for changes.
  *
- * @param  {Object} opt   source, layout, output, silent, files, pretty
+ * @param  {Object} options - source, layout, output, silent, files, pretty
  */
 function watch (options) {
   var gaze = require('gaze')

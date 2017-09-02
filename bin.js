@@ -15,6 +15,12 @@ var clopts = require('cliclopts')([
     default: true
   },
   {
+    name: 'el',
+    abbr: 'e',
+    help: 'css selector for target element',
+    default: '.markdown-body'
+  },
+  {
     name: 'layout',
     abbr: 'l',
     help: 'path to layout file'
