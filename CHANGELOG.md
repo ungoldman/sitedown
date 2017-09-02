@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.0](https://github.com/ungoldman/sitedown/releases/v3.1.1) - 2017-09-01
+
+### Features
+
+- add style.css to default layout (#26)
+- add option for custom target element (#15)
+
 ## [3.1.1](https://github.com/ungoldman/sitedown/releases/v3.1.1) - 2016-11-28
 
 [view diff](https://github.com/ungoldman/sitedown/compare/v3.1.0...v3.1.1)
