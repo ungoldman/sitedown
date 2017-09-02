@@ -10,7 +10,7 @@
   <body class="serif">
     <nav class="top-bar">
       <div class="top-bar-right">
-        <a class="top-bar-link" href="https://github.com/ungoldman/sitedown/">
+        <a class="top-bar-link" href="https://github.com/hypermodules/sitedown/">
           <i class="fa fa-github-alt"></i> github
         </a>
       </div>
@@ -46,12 +46,13 @@ Usage: sitedown [source] [options]
     --build, -b           path to build directory (default: &quot;build&quot;)
     --pretty              use directory indexes for pretty URLs (default: true)
     --layout, -l          path to layout file
+    --el, -e              css selector for target element (default: &quot;.markdown-body&quot;)
     --silent, -s          make less noise during build
     --watch, -w           watch a directory or file (experimental)
     --version, -v         show version information
     --help, -h            show help
 </code></pre>
-<p><strong>Protip</strong>: You <em>can</em> install a node command line utility globally (<code>npm install --global sitedown</code>), but it&#x2019;s usually <em>better</em> to install it locally (<code>npm install --save-dev sitedown</code>) and access it via <code>package.json</code> scripts (e.g. <code>&quot;build-site&quot;: &quot;sitedown . -b site/ -l layout.html&quot;</code>). This way you don&#x2019;t pollute the global environment with random scripts and your utility is saved and versioned side by side with your project. &#x2728;</p>
+<p><strong>Protip</strong>: You <em>can</em> install a node command line utility globally (<code>npm install --global sitedown</code>), but it&#x2019;s usually <em>better</em> to install it locally (<code>npm install --save-dev sitedown</code>) and access it via <code>package.json</code> scripts (e.g. <code>&quot;build-site&quot;: &quot;sitedown .&quot;</code>). This way you don&#x2019;t pollute the global environment with random scripts and your utility is saved and versioned side by side with your project. &#x2728;</p>
 <h3>Node API</h3>
 <pre><code class="language-js"><span class="hljs-keyword">var</span> sitedown = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;sitedown&apos;</span>)
 
@@ -59,6 +60,7 @@ Usage: sitedown [source] [options]
   <span class="hljs-attr">source</span>: <span class="hljs-string">&apos;.&apos;</span>,            <span class="hljs-comment">// path to source directory               default: cwd</span>
   build: <span class="hljs-string">&apos;build&apos;</span>,         <span class="hljs-comment">// path to build directory                default: &apos;build&apos; in cwd</span>
   pretty: <span class="hljs-literal">true</span>,           <span class="hljs-comment">// use directory indexes for pretty URLs  default: true</span>
+  el: <span class="hljs-string">&apos;.markdown-body&apos;</span>,   <span class="hljs-comment">// css selector for target element        default: &apos;.markdown-body&apos;</span>
   layout: <span class="hljs-string">&apos;layout.html&apos;</span>,  <span class="hljs-comment">// path to layout                         default: none</span>
   silent: <span class="hljs-literal">false</span>           <span class="hljs-comment">// make less noise during build           default: false</span>
 }
@@ -77,12 +79,14 @@ sitedown(options, <span class="hljs-function"><span class="hljs-keyword">functio
     <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://unpkg.com/style.css@latest/style.css&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;markdown-body&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 </code></pre>
+<p>The default layout comes bundled with <a href="https://ungoldman.github.io/style.css"><code>style.css</code></a>, a classless stylesheet for markdown documents.</p>
 <h3>Directory indexes (pretty URLs)</h3>
 <p>Markdown files (<code>$f.md</code>, <code>$f.markdown</code>) are lowercased and parsed into <code>$f/index.html</code> files. Directory indexes can be disabled with the <code>pretty: false</code> option. <code>README.md</code> files are always converted to directory indexes (<code>index.html</code>).</p>
 <h3>Links</h3>
