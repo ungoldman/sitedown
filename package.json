@@ -7,7 +7,7 @@
     "sitedown": "./bin.js"
   },
   "bugs": {
-    "url": "https://github.com/ungoldman/sitedown/issues"
+    "url": "https://github.com/hypermodules/sitedown/issues"
   },
   "dependencies": {
     "cheerio": "^0.22.0",
@@ -39,7 +39,7 @@
     "tap-spec": "^4.0.2",
     "tape": "^4.0.0"
   },
-  "homepage": "https://github.com/ungoldman/sitedown",
+  "homepage": "https://github.com/hypermodules/sitedown",
   "keywords": [
     "generator",
     "markdown",
@@ -51,7 +51,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ungoldman/sitedown.git"
+    "url": "https://github.com/hypermodules/sitedown.git"
   },
   "scripts": {
     "gh-pages": "npm run site && gh-pages -d site",
