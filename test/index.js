@@ -5,24 +5,33 @@ var test = require('tape')
 var sitedown = require('../')
 var enc = { encoding: 'utf8' }
 var layout = '<title></title><main class="markdown-body"></main>'
+var customElementLayout = '<title></title><main class="i-love-spiderman"></main>'
 
 test('markdown to html', function (t) {
-  var file = path.join(__dirname, 'markdown', 'README.md')
+  var file = path.join(__dirname, 'fixtures', 'md', 'README.md')
   var html = sitedown.mdToHtml(file)
   t.equals(html, generatedIndex, 'conversion lgtm')
   t.end()
 })
 
 test('injecting body into layout', function (t) {
-  var file = path.join(__dirname, 'markdown', 'README.md')
+  var file = path.join(__dirname, 'fixtures', 'md', 'README.md')
   var body = sitedown.mdToHtml(file)
   var html = sitedown.buildPage('w00t', body, layout)
   t.equals(html, '<title>w00t</title><main class="markdown-body">' + generatedIndex + '</main>', 'header, content, & footer are there')
   t.end()
 })
 
+test('injecting body into layout w/ custom element', function (t) {
+  var file = path.join(__dirname, 'fixtures', 'md', 'README.md')
+  var body = sitedown.mdToHtml(file)
+  var html = sitedown.buildPage('w00t', body, customElementLayout, '.i-love-spiderman')
+  t.equals(html, '<title>w00t</title><main class="i-love-spiderman">' + generatedIndex + '</main>', 'header, content, & footer are there')
+  t.end()
+})
+
 test('rewrite markdown links', function (t) {
-  var file = path.join(__dirname, 'markdown', 'rewrite.md')
+  var file = path.join(__dirname, 'fixtures', 'md', 'rewrite.md')
   var body = sitedown.rewriteLinks(sitedown.mdToHtml(file))
   var html = sitedown.buildPage('', body, layout)
   t.equals(html, generatedRewrite, 'markdown link got rewritten')
@@ -30,7 +39,7 @@ test('rewrite markdown links', function (t) {
 })
 
 test('rewrite markdown links - readme', function (t) {
-  var file = path.join(__dirname, 'markdown', 'rewritereadme.md')
+  var file = path.join(__dirname, 'fixtures', 'md', 'rewritereadme.md')
   var body = sitedown.rewriteLinks(sitedown.mdToHtml(file))
   var html = sitedown.buildPage('', body, layout)
   t.equals(html, generatedRewriteReadme, 'markdown link got rewritten')
@@ -38,7 +47,7 @@ test('rewrite markdown links - readme', function (t) {
 })
 
 test('rewrite markdown links - pretty: false', function (t) {
-  var file = path.join(__dirname, 'markdown', 'rewrite.md')
+  var file = path.join(__dirname, 'fixtures', 'md', 'rewrite.md')
   var body = sitedown.rewriteLinks(sitedown.mdToHtml(file), false)
   var html = sitedown.buildPage('', body, layout)
   t.equals(html, generatedUglyRewrite, 'markdown link got rewritten')
@@ -46,7 +55,7 @@ test('rewrite markdown links - pretty: false', function (t) {
 })
 
 test('rewrite markdown links starting named http', function (t) {
-  var file = path.join(__dirname, 'markdown', 'rewritehttpfoo.md')
+  var file = path.join(__dirname, 'fixtures', 'md', 'rewritehttpfoo.md')
   var body = sitedown.rewriteLinks(sitedown.mdToHtml(file))
   var html = sitedown.buildPage('', body, layout)
   t.equals(html, generatedRewriteHttpfooMd, 'markdown link httpfoo.md got rewritten')
@@ -54,7 +63,7 @@ test('rewrite markdown links starting named http', function (t) {
 })
 
 test('do not rewrite https links to md', function (t) {
-  var file = path.join(__dirname, 'markdown', 'norewritehttps.md')
+  var file = path.join(__dirname, 'fixtures', 'md', 'norewritehttps.md')
   var body = sitedown.rewriteLinks(sitedown.mdToHtml(file))
   var html = sitedown.buildPage('', body, layout)
   t.equals(html, generatedNoRewriteHttps, 'https hyperlink did not get rewritten')
@@ -62,7 +71,7 @@ test('do not rewrite https links to md', function (t) {
 })
 
 test('do not rewrite http links to md', function (t) {
-  var file = path.join(__dirname, 'markdown', 'norewritehttp.md')
+  var file = path.join(__dirname, 'fixtures', 'md', 'norewritehttp.md')
   var body = sitedown.rewriteLinks(sitedown.mdToHtml(file))
   var html = sitedown.buildPage('', body, layout)
   t.equals(html, generatedNoRewriteHttp, 'http hyperlink did not get rewritten')
@@ -71,7 +80,7 @@ test('do not rewrite http links to md', function (t) {
 
 test('site generation', function (t) {
   var opts = {
-    source: path.join(__dirname, 'markdown'),
+    source: path.join(__dirname, 'fixtures', 'md'),
     build: path.join(__dirname, 'build'),
     layout: path.resolve(__dirname, '..', 'layout.html'),
     silent: true
@@ -110,7 +119,7 @@ test('site generation', function (t) {
 
 test('site generation - callback with error if options.layout file does not exist', function (t) {
   var opts = {
-    source: path.join(__dirname, 'markdown'),
+    source: path.join(__dirname, 'fixtures', 'md'),
     build: path.join(__dirname, 'build'),
     layout: 'nope',
     silent: true
@@ -124,7 +133,7 @@ test('site generation - callback with error if options.layout file does not exis
 
 test('site generation - throws error if options.layout file does not exist and no callback passed', function (t) {
   var opts = {
-    source: path.join(__dirname, 'markdown'),
+    source: path.join(__dirname, 'fixtures', 'md'),
     build: path.join(__dirname, 'build'),
     layout: 'nope',
     silent: true
@@ -138,7 +147,7 @@ test('site generation - throws error if options.layout file does not exist and n
 
 test('site generation - no directory indexes (pretty: false)', function (t) {
   var opts = {
-    source: path.join(__dirname, 'markdown'),
+    source: path.join(__dirname, 'fixtures', 'md'),
     build: path.join(__dirname, 'build'),
     layout: path.resolve(__dirname, '..', 'layout.html'),
     silent: true,
@@ -176,6 +185,35 @@ test('site generation - no directory indexes (pretty: false)', function (t) {
   }
 })
 
+test('site generation - custom element', function (t) {
+  var opts = {
+    source: path.join(__dirname, 'fixtures', 'md'),
+    build: path.join(__dirname, 'build'),
+    layout: path.resolve(__dirname, 'fixtures', 'html', 'custom-element.html'),
+    silent: true,
+    pretty: false,
+    el: '.custom-element'
+  }
+
+  rimraf(opts.build, generateSite)
+
+  function generateSite () {
+    sitedown(opts, function (err) {
+      t.error(err, 'ran without errors')
+
+      var index = fs.readFileSync(path.join(opts.build, 'index.html'), enc)
+
+      t.ok(index, 'README.md converted to index.html')
+      t.equals(index, customElementContent, 'produced expected output')
+
+      rimraf(opts.build, function (err) {
+        t.error(err, 'cleanup')
+        t.end()
+      })
+    })
+  }
+})
+
 var generatedIndex = '<h1>TESTING!</h1>\n'
 var generatedRewrite = '<title></title><main class="markdown-body"><p><a href="rewrite/">rewrite me</a></p>\n</main>'
 var generatedRewriteReadme = '<title></title><main class="markdown-body"><p><a href="/">rewrite me right</a></p>\n</main>'
@@ -184,6 +222,7 @@ var generatedNoRewriteHttps = '<title></title><main class="markdown-body"><p><a 
 var generatedNoRewriteHttp = '<title></title><main class="markdown-body"><p><a href="http://github.com/ungoldman/sitedown/README.md">or me!</a></p>\n</main>'
 var generatedRewriteHttpfooMd = '<title></title><main class="markdown-body"><p><a href="httpfoo/">rewrite</a></p>\n</main>'
 var indexContent = '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>TESTING!</title>\n  <link rel="stylesheet" href="https://unpkg.com/style.css@latest/style.css">\n</head>\n<body>\n  <main class="markdown-body"><h1>TESTING!</h1>\n</main>\n</body>\n</html>\n'
+var customElementContent = '<html><title>TESTING!</title><body class="custom-element"><h1>TESTING!</h1>\n</body></html>\n'
 var rewriteContent = '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title></title>\n  <link rel="stylesheet" href="https://unpkg.com/style.css@latest/style.css">\n</head>\n<body>\n  <main class="markdown-body"><p><a href="rewrite/">rewrite me</a></p>\n</main>\n</body>\n</html>\n'
 var rewriteUglyContent = '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title></title>\n  <link rel="stylesheet" href="https://unpkg.com/style.css@latest/style.css">\n</head>\n<body>\n  <main class="markdown-body"><p><a href="rewrite.html">rewrite me</a></p>\n</main>\n</body>\n</html>\n'
 var nestedContent = '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>Style Guide</title>\n  <link rel="stylesheet" href="https://unpkg.com/style.css@latest/style.css">\n</head>\n<body>\n  <main class="markdown-body"><h1>Style Guide</h1>\n<h1>Article Title</h1>\n<p><strong>Article content</strong> led to <em>negative</em> values. In primates decreased the objects discovered during the lossless join property <code>(Fi)+ =</code> that is not. Recollapse. The knowledge of recent cosmological models. And methods on another system in the associated with the principle of <a href="#fake-link">Horn-clause</a> logic programming in universes that. If based are reviewed. And trial preparedness is a cosmological models the data collected from conventional analyses and the transition from F is all. At z=0 46&#xB1;0 13. <code>&quot;code quote test&quot;</code> The resulting system on which.</p>\n<p><img src="http://38.media.tumblr.com/tumblr_mdo6z0KBpf1rwy00jo1_400.gif" alt="One note is all that is needed."></p>\n<blockquote>\n<p>Despite double-blind randomized controlled clinical trials choosing an efficacy measure and that. <code>Xi &#x2282; U</code> and interpreting these. New rules intuitionistically (<code>(&apos;single quotes too&apos;)</code>) in particular networks of natural selection on body size. And human cost in spatially homogeneous spacetimes.</p>\n</blockquote>\n<h2>Header 2</h2>\n<table>\n<thead>\n<tr>\n<th>h</th>\n<th>Long header</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>abc</td>\n<td>def</td>\n</tr>\n<tr>\n<td>abc2</td>\n<td>def2</td>\n</tr>\n</tbody>\n</table>\n<p>Which ZFC cannot determine more net directional selection on the objects. Discovered during the theory of transmission mathematical models there may be difficulties with the possibility. Of <code>1 f(06)</code> and calculation of a basic. Principle of the treasury program variable in <a href="#faker-link">Kerr geometry gravitational</a>.</p>\n<h3>Header 3</h3>\n<pre><code class="language-js"><span class="hljs-comment">// &quot;code quote test&quot; (&apos;single quotes too&apos;)</span>\n<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPrimes</span>(<span class="hljs-params">max</span>) </span>{\n    <span class="hljs-keyword">var</span> sieve = [], i, j, primes = [];\n    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">2</span>; i &lt;= max; ++i) {\n        <span class="hljs-keyword">if</span> (!sieve[i]) {\n            <span class="hljs-comment">// i has not been marked -- it is prime</span>\n            primes.push(i);\n            <span class="hljs-keyword">for</span> (j = i &lt;&lt; <span class="hljs-number">1</span>; j &lt;= max; j += i) {\n                sieve[j] = <span class="hljs-literal">true</span>;\n            }\n        }\n    }\n    <span class="hljs-keyword">return</span> primes;\n}\n\ngetPrimes(<span class="hljs-number">1000</span>);\n</code></pre>\n<h4>Header 4</h4>\n<p>Special relativity Einstein also investigated the halting probability we only such that the study will influence sample.</p>\n<ol>\n<li>Size calculations for &#x3A9;.</li>\n<li>A realistic model of population heterogeneities.</li>\n<li>Black holes are inconsistent with it leads to begin this is an anthropic.</li>\n</ol>\n<h5>Header 5</h5>\n<p>Considerations do not approach of a pressing issue. Despite shortcomings. General theory there has both the only have discovered 16 Type one precludes the analysis of reality of the motion of gravitational-field entropy thus led to demonstrate.</p>\n<hr>\n<p>Data from F. Is also investigated the other then either (1) is expressed as an element corresponding to decide whether the analysis is not recollapse the pattern.</p>\n<h6>Header 6</h6>\n<ul>\n<li>Of atoms.</li>\n<li>And trial preparedness.</li>\n<li>Is restricted to demonstrate that can.</li>\n</ul>\n<p>Be problematic interim analyses support. The lossless. Join property (Fi)+ = 1 bits - as you get a universal.</p>\n</main>\n</body>\n</html>\n'

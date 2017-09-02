@@ -48,13 +48,14 @@ Usage: sitedown [source] [options]
     --build, -b           path to build directory (default: "build")
     --pretty              use directory indexes for pretty URLs (default: true)
     --layout, -l          path to layout file
+    --el, -e              css selector for target element (default: ".markdown-body")
     --silent, -s          make less noise during build
     --watch, -w           watch a directory or file (experimental)
     --version, -v         show version information
     --help, -h            show help
 ```
 
-**Protip**: You *can* install a node command line utility globally (`npm install --global sitedown`), but it's usually *better* to install it locally (`npm install --save-dev sitedown`) and access it via `package.json` scripts (e.g. `"build-site": "sitedown . -b site/ -l layout.html"`). This way you don't pollute the global environment with random scripts and your utility is saved and versioned side by side with your project. :sparkles:
+**Protip**: You *can* install a node command line utility globally (`npm install --global sitedown`), but it's usually *better* to install it locally (`npm install --save-dev sitedown`) and access it via `package.json` scripts (e.g. `"build-site": "sitedown ."`). This way you don't pollute the global environment with random scripts and your utility is saved and versioned side by side with your project. :sparkles:
 
 ### Node API
 
@@ -65,6 +66,7 @@ var options = {
   source: '.',            // path to source directory               default: cwd
   build: 'build',         // path to build directory                default: 'build' in cwd
   pretty: true,           // use directory indexes for pretty URLs  default: true
+  el: '.markdown-body',   // css selector for target element        default: '.markdown-body'
   layout: 'layout.html',  // path to layout                         default: none
   silent: false           // make less noise during build           default: false
 }
