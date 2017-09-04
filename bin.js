@@ -26,6 +26,14 @@ var clopts = require('cliclopts')([
     help: 'path to layout file'
   },
   {
+    name: 'github-headings',
+    abbr: 'g',
+    alias: 'githubHeadings',
+    help: 'add anchors to headings just like GitHub',
+    boolean: true,
+    default: false
+  },
+  {
     name: 'silent',
     abbr: 's',
     help: 'make less noise during build',
