@@ -10,7 +10,14 @@ var customElementLayout = '<title></title><main class="i-love-spiderman"></main>
 test('markdown to html', function (t) {
   var file = path.join(__dirname, 'fixtures', 'md', 'README.md')
   var html = sitedown.mdToHtml(file)
-  t.equals(html, generatedIndex, 'conversion lgtm')
+  t.equals(html, generatedIndexLgtm, 'conversion lgtm')
+  t.end()
+})
+
+test('markdown to html with heading anchors IDs', function (t) {
+  var file = path.join(__dirname, 'fixtures', 'md', 'README.md')
+  var html = sitedown.mdToHtml(file, true)
+  t.equals(html, generatedIndexLgtmWithAnchors, 'conversion lgtm')
   t.end()
 })
 
@@ -214,6 +221,37 @@ test('site generation - custom element', function (t) {
   }
 })
 
+test('site generation - prefix heading IDs and add anchor links', function (t) {
+  var opts = {
+    source: path.join(__dirname, 'fixtures', 'md'),
+    build: path.join(__dirname, 'build'),
+    silent: true,
+    pretty: false,
+    githubHeadings: true
+  }
+
+  rimraf(opts.build, generateSite)
+
+  function generateSite () {
+    sitedown(opts, function (err) {
+      t.error(err, 'ran without errors')
+
+      var index = fs.readFileSync(path.join(opts.build, 'index.html'), enc)
+
+      t.ok(index, 'README.md converted to index.html')
+      t.equals(index, indexContentWithPrefixAndAnchors, 'produced expected output')
+
+      rimraf(opts.build, function (err) {
+        t.error(err, 'cleanup')
+        t.end()
+      })
+    })
+  }
+})
+
+var generatedIndexLgtm = '<h1>TESTING!</h1>\n'
+var generatedIndexLgtmWithAnchors = '<h1><a id="testing" class="anchor" href="#testing" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TESTING!</h1>\n'
+
 var generatedIndex = '<h1>TESTING!</h1>\n'
 var generatedRewrite = '<title></title><main class="markdown-body"><p><a href="rewrite/">rewrite me</a></p>\n</main>'
 var generatedRewriteReadme = '<title></title><main class="markdown-body"><p><a href="/">rewrite me right</a></p>\n</main>'
@@ -222,6 +260,10 @@ var generatedNoRewriteHttps = '<title></title><main class="markdown-body"><p><a 
 var generatedNoRewriteHttp = '<title></title><main class="markdown-body"><p><a href="http://github.com/hypermodules/sitedown/README.md">or me!</a></p>\n</main>'
 var generatedRewriteHttpfooMd = '<title></title><main class="markdown-body"><p><a href="httpfoo/">rewrite</a></p>\n</main>'
 var indexContent = '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>TESTING!</title>\n  <link rel="stylesheet" href="https://unpkg.com/style.css">\n</head>\n<body>\n  <main class="markdown-body"><h1>TESTING!</h1>\n</main>\n</body>\n</html>\n'
+
+var coolSvgLinkIcon = '<svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>'
+var indexContentWithPrefixAndAnchors = '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>TESTING!</title>\n  <link rel="stylesheet" href="https://unpkg.com/style.css">\n</head>\n<body>\n  <main class="markdown-body"><h1><a id="testing" class="anchor" href="#testing" aria-hidden="true">' + coolSvgLinkIcon + '</a>TESTING!</h1>\n</main>\n</body>\n</html>\n'
+
 var customElementContent = '<html><title>TESTING!</title><body class="custom-element"><h1>TESTING!</h1>\n</body></html>\n'
 var rewriteContent = '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title></title>\n  <link rel="stylesheet" href="https://unpkg.com/style.css">\n</head>\n<body>\n  <main class="markdown-body"><p><a href="rewrite/">rewrite me</a></p>\n</main>\n</body>\n</html>\n'
 var rewriteUglyContent = '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title></title>\n  <link rel="stylesheet" href="https://unpkg.com/style.css">\n</head>\n<body>\n  <main class="markdown-body"><p><a href="rewrite.html">rewrite me</a></p>\n</main>\n</body>\n</html>\n'

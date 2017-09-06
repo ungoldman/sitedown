@@ -5,7 +5,9 @@ var mkdirp = require('mkdirp')
 var es = require('event-stream')
 var cheerio = require('cheerio')
 var hljs = require('highlight.js')
-var md = require('markdown-it')({
+var markdownIt = require('markdown-it')
+
+var mdOpts = {
   html: true,
   linkify: true,
   typographer: true,
@@ -17,18 +19,17 @@ var md = require('markdown-it')({
     }
     return '' // use external default escaping
   }
-})
-  .use(require('markdown-it-sub'))
-  .use(require('markdown-it-sup'))
-  .use(require('markdown-it-footnote'))
-  .use(require('markdown-it-deflist'))
-  .use(require('markdown-it-emoji'))
-  .use(require('markdown-it-ins'))
-  .use(require('markdown-it-mark'))
-  .use(require('markdown-it-abbr'))
+}
 
-// disable autolinking for filenames
-md.linkify.tlds('.md', false) // markdown
+var markdownItSub = require('markdown-it-sub')
+var markdownItSup = require('markdown-it-sup')
+var markdownItFootnote = require('markdown-it-footnote')
+var markdownItDeflist = require('markdown-it-deflist')
+var markdownItEmoji = require('markdown-it-emoji')
+var markdownItIns = require('markdown-it-ins')
+var markdownItMark = require('markdown-it-mark')
+var markdownItAbbr = require('markdown-it-abbr')
+var markdownItGithubHeadings = require('markdown-it-github-headings')
 
 var defaultLayout = path.join(__dirname, 'layout.html')
 var encoding = { encoding: 'utf8' }
@@ -85,10 +86,29 @@ function sitedown (options, callback) {
  * Turns markdown file into HTML.
  *
  * @param  {String} filePath - full path to markdown file
+ * @param  {Boolean} githubHeadings - use GitHub style heading anchors
  * @return {String} - md file converted to html
  */
-function mdToHtml (filePath) {
+function mdToHtml (filePath, githubHeadings) {
   var body = fs.readFileSync(filePath, encoding)
+
+  var md = markdownIt(mdOpts)
+    .use(markdownItSub)
+    .use(markdownItSup)
+    .use(markdownItFootnote)
+    .use(markdownItDeflist)
+    .use(markdownItEmoji)
+    .use(markdownItIns)
+    .use(markdownItMark)
+    .use(markdownItAbbr)
+
+  if (githubHeadings) {
+    md = md.use(markdownItGithubHeadings, {prefixHeadingIds: false})
+  }
+
+  // disable autolinking for filenames
+  md.linkify.tlds('.md', false) // markdown
+
   return md.render(body)
 }
 
@@ -148,7 +168,7 @@ function rewriteLinks (body, pretty) {
 /**
  * Generates site from array of markdown file paths.
  *
- * @param {Object} options - source, layout, output, silent, files, pretty, el
+ * @param {Object} options - source, layout, output, silent, files, pretty, el, githubHeadings
  * @param {Function} callback
  */
 function generateSite (options, callback) {
@@ -175,7 +195,7 @@ function generateSite (options, callback) {
     }
 
     var dest = path.format(parsedFile)
-    var body = rewriteLinks(mdToHtml(path.join(options.source, file)), options.pretty)
+    var body = rewriteLinks(mdToHtml(path.join(options.source, file), options.githubHeadings), options.pretty)
     var title = cheerio.load(body)('h1').first().text().trim()
     var html = buildPage(title, body, layout, options.el)
 

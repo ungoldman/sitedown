@@ -49,6 +49,7 @@ Usage: sitedown [source] [options]
     --pretty              use directory indexes for pretty URLs (default: true)
     --layout, -l          path to layout file
     --el, -e              css selector for target element (default: ".markdown-body")
+    --github-headings, -g add anchors to headings just like GitHub (default: false)
     --silent, -s          make less noise during build
     --watch, -w           watch a directory or file (experimental)
     --version, -v         show version information
@@ -63,12 +64,13 @@ Usage: sitedown [source] [options]
 var sitedown = require('sitedown')
 
 var options = {
-  source: '.',            // path to source directory               default: cwd
-  build: 'build',         // path to build directory                default: 'build' in cwd
-  pretty: true,           // use directory indexes for pretty URLs  default: true
-  el: '.markdown-body',   // css selector for target element        default: '.markdown-body'
-  layout: 'layout.html',  // path to layout                         default: none
-  silent: false           // make less noise during build           default: false
+  source: '.',            // path to source directory                 default: cwd
+  build: 'build',         // path to build directory                  default: 'build' in cwd
+  pretty: true,           // use directory indexes for pretty URLs    default: true
+  el: '.markdown-body',   // css selector for target element          default: '.markdown-body'
+  layout: 'layout.html',  // path to layout                           default: none
+  githubHeadings: false   // add anchors to headings just like GitHub default: false
+  silent: false           // make less noise during build             default: false
 }
 
 sitedown(options, function (err) {
