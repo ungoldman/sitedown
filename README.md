@@ -38,7 +38,7 @@ npm install sitedown
 
 ### CLI
 
-```
+```console
 $ sitedown --help
 Usage: sitedown [source] [options]
 
