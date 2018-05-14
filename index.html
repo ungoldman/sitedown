@@ -5,7 +5,8 @@
     <title>sitedown</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://ungoldman.github.io/style.css/site.css">
+    <link rel="stylesheet" href="https://unpkg.com/style.css">
+    <link rel="stylesheet" href="https://css-pkg.github.io/style.css/site.css">
   </head>
   <body class="serif">
     <nav class="top-bar">
@@ -37,7 +38,7 @@
 </code></pre>
 <h2>Usage</h2>
 <h3>CLI</h3>
-<pre><code>$ sitedown --help
+<pre><code class="language-console"><span class="hljs-meta">$</span><span class="bash"> sitedown --<span class="hljs-built_in">help</span></span>
 Usage: sitedown [source] [options]
 
     Example: sitedown source/ -b build/ -l layout.html
@@ -47,6 +48,7 @@ Usage: sitedown [source] [options]
     --pretty              use directory indexes for pretty URLs (default: true)
     --layout, -l          path to layout file
     --el, -e              css selector for target element (default: &quot;.markdown-body&quot;)
+    --github-headings, -g add anchors to headings just like GitHub (default: false)
     --silent, -s          make less noise during build
     --watch, -w           watch a directory or file (experimental)
     --version, -v         show version information
@@ -57,12 +59,13 @@ Usage: sitedown [source] [options]
 <pre><code class="language-js"><span class="hljs-keyword">var</span> sitedown = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;sitedown&apos;</span>)
 
 <span class="hljs-keyword">var</span> options = {
-  <span class="hljs-attr">source</span>: <span class="hljs-string">&apos;.&apos;</span>,            <span class="hljs-comment">// path to source directory               default: cwd</span>
-  build: <span class="hljs-string">&apos;build&apos;</span>,         <span class="hljs-comment">// path to build directory                default: &apos;build&apos; in cwd</span>
-  pretty: <span class="hljs-literal">true</span>,           <span class="hljs-comment">// use directory indexes for pretty URLs  default: true</span>
-  el: <span class="hljs-string">&apos;.markdown-body&apos;</span>,   <span class="hljs-comment">// css selector for target element        default: &apos;.markdown-body&apos;</span>
-  layout: <span class="hljs-string">&apos;layout.html&apos;</span>,  <span class="hljs-comment">// path to layout                         default: none</span>
-  silent: <span class="hljs-literal">false</span>           <span class="hljs-comment">// make less noise during build           default: false</span>
+  <span class="hljs-attr">source</span>: <span class="hljs-string">&apos;.&apos;</span>,            <span class="hljs-comment">// path to source directory                 default: cwd</span>
+  build: <span class="hljs-string">&apos;build&apos;</span>,         <span class="hljs-comment">// path to build directory                  default: &apos;build&apos; in cwd</span>
+  pretty: <span class="hljs-literal">true</span>,           <span class="hljs-comment">// use directory indexes for pretty URLs    default: true</span>
+  el: <span class="hljs-string">&apos;.markdown-body&apos;</span>,   <span class="hljs-comment">// css selector for target element          default: &apos;.markdown-body&apos;</span>
+  layout: <span class="hljs-string">&apos;layout.html&apos;</span>,  <span class="hljs-comment">// path to layout                           default: none</span>
+  githubHeadings: <span class="hljs-literal">false</span>   <span class="hljs-comment">// add anchors to headings just like GitHub default: false</span>
+  silent: <span class="hljs-literal">false</span>           <span class="hljs-comment">// make less noise during build             default: false</span>
 }
 
 sitedown(options, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
