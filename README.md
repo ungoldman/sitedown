@@ -100,7 +100,7 @@ The default layout is:
 </html>
 ```
 
-The default layout comes bundled with [`style.css`](https://ungoldman.github.io/style.css), a classless stylesheet for markdown documents.
+The default layout comes bundled with [`style.css`](https://css-pkg.github.io/style.css), a classless stylesheet for markdown documents.
 
 ### Directory indexes (pretty URLs)
 
