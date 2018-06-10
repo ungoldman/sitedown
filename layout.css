@@ -1,0 +1,7 @@
+.markdown-body {
+  max-width: 46em;
+  margin: 2em auto;
+  padding: 0 1em;
+  overflow: hidden;
+  word-wrap: break-word;
+}
