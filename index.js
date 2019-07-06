@@ -4,21 +4,12 @@ var readdirp = require('readdirp')
 var mkdirp = require('mkdirp')
 var es = require('event-stream')
 var cheerio = require('cheerio')
-var hljs = require('highlight.js')
 var markdownIt = require('markdown-it')
 
 var mdOpts = {
   html: true,
   linkify: true,
-  typographer: true,
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(lang, str).value
-      } catch (e) {}
-    }
-    return '' // use external default escaping
-  }
+  typographer: true
 }
 
 var markdownItSub = require('markdown-it-sub')
@@ -29,6 +20,7 @@ var markdownItEmoji = require('markdown-it-emoji')
 var markdownItIns = require('markdown-it-ins')
 var markdownItMark = require('markdown-it-mark')
 var markdownItAbbr = require('markdown-it-abbr')
+var makdowniItHighlightjs = require('markdown-it-highlightjs')
 var markdownItGithubHeadings = require('markdown-it-github-headings')
 
 var defaultLayout = path.join(__dirname, 'layout.html')
@@ -101,6 +93,7 @@ function mdToHtml (filePath, githubHeadings) {
     .use(markdownItIns)
     .use(markdownItMark)
     .use(markdownItAbbr)
+    .use(makdowniItHighlightjs, {auto: false, code: true})
 
   if (githubHeadings) {
     md = md.use(markdownItGithubHeadings, {prefixHeadingIds: false})
