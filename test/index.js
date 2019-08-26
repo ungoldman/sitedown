@@ -16,7 +16,7 @@ test('markdown to html', function (t) {
 
 test('markdown to html with heading anchors IDs', function (t) {
   var file = path.join(__dirname, 'fixtures', 'md', 'README.md')
-  var html = sitedown.mdToHtml(file, true)
+  var html = sitedown.mdToHtml(file, { githubHeadings: true })
   t.equals(html, generatedIndexLgtmWithAnchors, 'conversion lgtm')
   t.end()
 })
@@ -90,7 +90,8 @@ test('site generation', function (t) {
     source: path.join(__dirname, 'fixtures', 'md'),
     build: path.join(__dirname, 'build'),
     layout: path.resolve(__dirname, '..', 'layout.html'),
-    silent: true
+    silent: true,
+    hljsHighlights: true
   }
 
   rimraf(opts.build, generateSite)
@@ -158,7 +159,8 @@ test('site generation - no directory indexes (pretty: false)', function (t) {
     build: path.join(__dirname, 'build'),
     layout: path.resolve(__dirname, '..', 'layout.html'),
     silent: true,
-    pretty: false
+    pretty: false,
+    hljsHighlights: true
   }
 
   rimraf(opts.build, generateSite)

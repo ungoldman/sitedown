@@ -78,11 +78,12 @@ function sitedown (options, callback) {
  * Turns markdown file into HTML.
  *
  * @param  {String} filePath - full path to markdown file
- * @param  {Boolean} githubHeadings - use GitHub style heading anchors
+   @param  {Object} options - hljsHighlights, githubHeadings
  * @return {String} - md file converted to html
  */
-function mdToHtml (filePath, githubHeadings) {
+function mdToHtml (filePath, opts) {
   var body = fs.readFileSync(filePath, encoding)
+  if (!opts) opts = {}
 
   var md = markdownIt(mdOpts)
     .use(markdownItSub)
@@ -93,9 +94,12 @@ function mdToHtml (filePath, githubHeadings) {
     .use(markdownItIns)
     .use(markdownItMark)
     .use(markdownItAbbr)
-    .use(makdowniItHighlightjs, {auto: false, code: true})
 
-  if (githubHeadings) {
+  if (opts.hljsHighlights) {
+    md = md.use(makdowniItHighlightjs, {auto: false, code: true})
+  }
+
+  if (opts.githubHeadings) {
     md = md.use(markdownItGithubHeadings, {prefixHeadingIds: false})
   }
 
@@ -188,7 +192,10 @@ function generateSite (options, callback) {
     }
 
     var dest = path.format(parsedFile)
-    var body = rewriteLinks(mdToHtml(path.join(options.source, file), options.githubHeadings), options.pretty)
+    var body = rewriteLinks(mdToHtml(path.join(options.source, file), {
+      githubHeadings: options.githubHeadings,
+      hljsHighlights: options.hljsHighlights
+    }), options.pretty)
     var title = cheerio.load(body)('h1').first().text().trim()
     var html = buildPage(title, body, layout, options.el)
 
