@@ -159,8 +159,7 @@ test('site generation - no directory indexes (pretty: false)', function (t) {
     build: path.join(__dirname, 'build'),
     layout: path.resolve(__dirname, '..', 'layout.html'),
     silent: true,
-    pretty: false,
-    hljsHighlights: true
+    pretty: false
   }
 
   rimraf(opts.build, generateSite)
