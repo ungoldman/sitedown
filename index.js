@@ -20,7 +20,7 @@ var markdownItEmoji = require('markdown-it-emoji')
 var markdownItIns = require('markdown-it-ins')
 var markdownItMark = require('markdown-it-mark')
 var markdownItAbbr = require('markdown-it-abbr')
-var makdowniItHighlightjs = require('markdown-it-highlightjs')
+var markdownItHighlightjs = require('markdown-it-highlightjs')
 var markdownItGithubHeadings = require('markdown-it-github-headings')
 
 var defaultLayout = path.join(__dirname, 'layout.html')
@@ -94,10 +94,7 @@ function mdToHtml (filePath, opts) {
     .use(markdownItIns)
     .use(markdownItMark)
     .use(markdownItAbbr)
-
-  if (opts.hljsHighlights) {
-    md = md.use(makdowniItHighlightjs, {auto: false, code: true})
-  }
+    .use(markdownItHighlightjs, {auto: false, code: !opts.noHljsClass})
 
   if (opts.githubHeadings) {
     md = md.use(markdownItGithubHeadings, {prefixHeadingIds: false})
@@ -194,7 +191,7 @@ function generateSite (options, callback) {
     var dest = path.format(parsedFile)
     var body = rewriteLinks(mdToHtml(path.join(options.source, file), {
       githubHeadings: options.githubHeadings,
-      hljsHighlights: options.hljsHighlights
+      noHljsClass: options.noHljsClass
     }), options.pretty)
     var title = cheerio.load(body)('h1').first().text().trim()
     var html = buildPage(title, body, layout, options.el)

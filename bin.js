@@ -34,10 +34,10 @@ var clopts = require('cliclopts')([
     default: false
   },
   {
-    name: 'hljs-highlights',
+    name: 'no-hljs-class',
     abbr: 'c',
-    alias: 'hljsHighlights',
-    help: 'add hljs class to code blocks',
+    alias: 'noHljsClass',
+    help: 'don\'t add the hljs class to codeblocks',
     boolean: true,
     default: false
   },

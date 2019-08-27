@@ -50,7 +50,7 @@ Usage: sitedown [source] [options]
     --el, -e              css selector for target element (default: ".markdown-body")
     --layout, -l          path to layout file
     --github-headings, -g add anchors to headings just like GitHub (default: false)
-    --hljs-highlights, -c add hljs class to code blocks (default: false)
+    --no-hljs-class, -c   don't add the hljs class to codeblocks (default: false)
     --silent, -s          make less noise during build
     --watch, -w           watch a directory or file (experimental)
     --version, -v         show version information
@@ -71,7 +71,7 @@ var options = {
   el: '.markdown-body',   // css selector for target element          default: '.markdown-body'
   layout: 'layout.html',  // path to layout                           default: none
   githubHeadings: false,  // add anchors to headings just like GitHub default: false
-  hljsHighlights: false,  // add hljs class to code blocks            default: false
+  noHljsClass: false,     // don't add hljs class to codeblocks       default: false
   silent: false           // make less noise during build             default: false
 }
 
