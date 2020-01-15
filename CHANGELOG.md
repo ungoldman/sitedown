@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0](https://github.com/hypermodules/sitedown/releases/v4.0.0) - 2019-01-15
+
+### Breaking
+
+- Add correct hljs css class to code blocks to fully support hljs theme backgrounds.  Since this could change how your site looks if you are using hljs, this is a breaking change.  Use the `--no-hljs-class` flag to disable this css class.
+
 ## [3.3.2](https://github.com/hypermodules/sitedown/releases/v3.3.2) - 2018-11-26
 
 ### Fixes
