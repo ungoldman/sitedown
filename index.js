@@ -4,21 +4,12 @@ var readdirp = require('readdirp')
 var mkdirp = require('mkdirp')
 var es = require('event-stream')
 var cheerio = require('cheerio')
-var hljs = require('highlight.js')
 var markdownIt = require('markdown-it')
 
 var mdOpts = {
   html: true,
   linkify: true,
-  typographer: true,
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(lang, str).value
-      } catch (e) {}
-    }
-    return '' // use external default escaping
-  }
+  typographer: true
 }
 
 var markdownItSub = require('markdown-it-sub')
@@ -29,6 +20,7 @@ var markdownItEmoji = require('markdown-it-emoji')
 var markdownItIns = require('markdown-it-ins')
 var markdownItMark = require('markdown-it-mark')
 var markdownItAbbr = require('markdown-it-abbr')
+var markdownItHighlightjs = require('markdown-it-highlightjs')
 var markdownItGithubHeadings = require('markdown-it-github-headings')
 
 var defaultLayout = path.join(__dirname, 'layout.html')
@@ -86,11 +78,12 @@ function sitedown (options, callback) {
  * Turns markdown file into HTML.
  *
  * @param  {String} filePath - full path to markdown file
- * @param  {Boolean} githubHeadings - use GitHub style heading anchors
+   @param  {Object} options - hljsHighlights, githubHeadings
  * @return {String} - md file converted to html
  */
-function mdToHtml (filePath, githubHeadings) {
+function mdToHtml (filePath, opts) {
   var body = fs.readFileSync(filePath, encoding)
+  if (!opts) opts = {}
 
   var md = markdownIt(mdOpts)
     .use(markdownItSub)
@@ -101,8 +94,9 @@ function mdToHtml (filePath, githubHeadings) {
     .use(markdownItIns)
     .use(markdownItMark)
     .use(markdownItAbbr)
+    .use(markdownItHighlightjs, {auto: false, code: !opts.noHljsClass})
 
-  if (githubHeadings) {
+  if (opts.githubHeadings) {
     md = md.use(markdownItGithubHeadings, {prefixHeadingIds: false})
   }
 
@@ -195,7 +189,10 @@ function generateSite (options, callback) {
     }
 
     var dest = path.format(parsedFile)
-    var body = rewriteLinks(mdToHtml(path.join(options.source, file), options.githubHeadings), options.pretty)
+    var body = rewriteLinks(mdToHtml(path.join(options.source, file), {
+      githubHeadings: options.githubHeadings,
+      noHljsClass: options.noHljsClass
+    }), options.pretty)
     var title = cheerio.load(body)('h1').first().text().trim()
     var html = buildPage(title, body, layout, options.el)
 

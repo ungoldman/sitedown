@@ -34,6 +34,13 @@ var clopts = require('cliclopts')([
     default: false
   },
   {
+    name: 'no-hljs-class',
+    alias: 'noHljsClass',
+    help: 'don\'t add the hljs class to codeblocks',
+    boolean: true,
+    default: false
+  },
+  {
     name: 'silent',
     abbr: 's',
     help: 'make less noise during build',

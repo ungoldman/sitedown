@@ -47,9 +47,10 @@ Usage: sitedown [source] [options]
     source                path to source directory (default: current working directory)
     --build, -b           path to build directory (default: "build")
     --pretty              use directory indexes for pretty URLs (default: true)
-    --layout, -l          path to layout file
     --el, -e              css selector for target element (default: ".markdown-body")
+    --layout, -l          path to layout file
     --github-headings, -g add anchors to headings just like GitHub (default: false)
+    --no-hljs-class, -c   don't add the hljs class to codeblocks (default: false)
     --silent, -s          make less noise during build
     --watch, -w           watch a directory or file (experimental)
     --version, -v         show version information
@@ -69,7 +70,8 @@ var options = {
   pretty: true,           // use directory indexes for pretty URLs    default: true
   el: '.markdown-body',   // css selector for target element          default: '.markdown-body'
   layout: 'layout.html',  // path to layout                           default: none
-  githubHeadings: false   // add anchors to headings just like GitHub default: false
+  githubHeadings: false,  // add anchors to headings just like GitHub default: false
+  noHljsClass: false,     // don't add hljs class to codeblocks       default: false
   silent: false           // make less noise during build             default: false
 }
 
