@@ -39,7 +39,7 @@
     "snazzy": "^7.1.1",
     "standard": "^11.0.1",
     "tap-spec": "^5.0.0",
-    "tape": "^4.0.0"
+    "tape": "^5.0.1"
   },
   "homepage": "https://github.com/hypermodules/sitedown",
   "keywords": [
