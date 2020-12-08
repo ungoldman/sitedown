@@ -52,8 +52,7 @@ function sitedown (options, callback) {
     return callback(error)
   }
 
-  readdirp({
-    root: options.source,
+  readdirp(options.source, {
     fileFilter: ['*.md', '*.markdown'],
     directoryFilter: ['!.git', '!node_modules', '!' + options.build]
   })
