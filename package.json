@@ -27,7 +27,7 @@
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
     "minimist": "^1.1.1",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.4",
     "readdirp": "^2.1.0"
   },
   "devDependencies": {
