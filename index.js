@@ -52,8 +52,7 @@ function sitedown (options, callback) {
     return callback(error)
   }
 
-  readdirp({
-    root: options.source,
+  readdirp(options.source, {
     fileFilter: ['*.md', '*.markdown'],
     directoryFilter: ['!.git', '!node_modules', '!' + options.build]
   })
@@ -94,10 +93,10 @@ function mdToHtml (filePath, opts) {
     .use(markdownItIns)
     .use(markdownItMark)
     .use(markdownItAbbr)
-    .use(markdownItHighlightjs, {auto: false, code: !opts.noHljsClass})
+    .use(markdownItHighlightjs, { auto: false, code: !opts.noHljsClass })
 
   if (opts.githubHeadings) {
-    md = md.use(markdownItGithubHeadings, {prefixHeadingIds: false})
+    md = md.use(markdownItGithubHeadings, { prefixHeadingIds: false })
   }
 
   // disable autolinking for filenames
