@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.0](https://github.com/hypermodules/sitedown/releases/v5.0.0) - 2020-12-09
+
+### Breaking
+
+- Update all dependencies to their latest version.
+- Only test on Node 14 and 15.  Older versions may work, bymmv.
+- Older versions of Node are no longer supported.
+
 ## [4.0.0](https://github.com/hypermodules/sitedown/releases/v4.0.0) - 2019-01-15
 
 ### Breaking
