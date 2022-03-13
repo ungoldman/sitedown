@@ -3,7 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [5.0.0](https://github.com/hypermodules/sitedown/releases/v5.0.0) - 2020-12-09
+## Unreleased
+
+### Fixes
+
+- Fix links to reflect ownership transfer (hypermodules -> ungoldman).
+
+## [5.0.0](https://github.com/ungoldman/sitedown/releases/v5.0.0) - 2020-12-09
 
 ### Breaking
 
@@ -11,54 +17,54 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Only test on Node 14 and 15.  Older versions may work, bymmv.
 - Older versions of Node are no longer supported.
 
-## [4.0.0](https://github.com/hypermodules/sitedown/releases/v4.0.0) - 2019-01-15
+## [4.0.0](https://github.com/ungoldman/sitedown/releases/v4.0.0) - 2019-01-15
 
 ### Breaking
 
 - Add correct hljs css class to code blocks to fully support hljs theme backgrounds.  Since this could change how your site looks if you are using hljs, this is a breaking change.  Use the `--no-hljs-class` flag to disable this css class.
 
-## [3.3.2](https://github.com/hypermodules/sitedown/releases/v3.3.2) - 2018-11-26
+## [3.3.2](https://github.com/ungoldman/sitedown/releases/v3.3.2) - 2018-11-26
 
 ### Fixes
 
 - Pin event-stream to eliminate malicious package threat (#32)
 
-## [3.3.1](https://github.com/hypermodules/sitedown/releases/v3.3.1) - 2018-08-06
+## [3.3.1](https://github.com/ungoldman/sitedown/releases/v3.3.1) - 2018-08-06
 
 ### Fixes
 
 - Fix default layout css
 
-## [3.3.0](https://github.com/hypermodules/sitedown/releases/v3.3.0) - 2017-09-05
+## [3.3.0](https://github.com/ungoldman/sitedown/releases/v3.3.0) - 2017-09-05
 
 ### Features
 
 - add `markdown-it-github-headings` under `--github-headings` option (#22) (#28)
 
-## [3.2.1](https://github.com/hypermodules/sitedown/releases/v3.2.1) - 2017-09-03
+## [3.2.1](https://github.com/ungoldman/sitedown/releases/v3.2.1) - 2017-09-03
 
 ### Fixes
 
 - use shorter unpkg url for style.css
 
-## [3.2.0](https://github.com/hypermodules/sitedown/releases/v3.2.0) - 2017-09-01
+## [3.2.0](https://github.com/ungoldman/sitedown/releases/v3.2.0) - 2017-09-01
 
 ### Features
 
 - add style.css to default layout (#26)
 - add option for custom target element (#15)
 
-## [3.1.1](https://github.com/hypermodules/sitedown/releases/v3.1.1) - 2016-11-28
+## [3.1.1](https://github.com/ungoldman/sitedown/releases/v3.1.1) - 2016-11-28
 
-[view diff](https://github.com/hypermodules/sitedown/compare/v3.1.0...v3.1.1)
+[view diff](https://github.com/ungoldman/sitedown/compare/v3.1.0...v3.1.1)
 
 ### Fixes
 
 - hotfix: rewrite nested README links to index URLs
 
-## [3.1.0](https://github.com/hypermodules/sitedown/releases/v3.1.0) - 2016-11-11
+## [3.1.0](https://github.com/ungoldman/sitedown/releases/v3.1.0) - 2016-11-11
 
-[view diff](https://github.com/hypermodules/sitedown/compare/v3.0.1...v3.1.0)
+[view diff](https://github.com/ungoldman/sitedown/compare/v3.0.1...v3.1.0)
 
 ### Additions
 - add layout to watched files (#17)
@@ -67,16 +73,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changes
 - use `path.resolve` instead of `cwp`
 
-## [3.0.1](https://github.com/hypermodules/sitedown/releases/v3.0.1) - 2016-09-17
+## [3.0.1](https://github.com/ungoldman/sitedown/releases/v3.0.1) - 2016-09-17
 
-[view diff](https://github.com/hypermodules/sitedown/compare/v3.0.0...v3.0.1)
+[view diff](https://github.com/ungoldman/sitedown/compare/v3.0.0...v3.0.1)
 
 ### Fixes
 - bugfix: disable autolinking for filenames (just `.md` for now)
 
-## [3.0.0](https://github.com/hypermodules/sitedown/releases/v3.0.0) - 2016-09-17
+## [3.0.0](https://github.com/ungoldman/sitedown/releases/v3.0.0) - 2016-09-17
 
-[view diff](https://github.com/hypermodules/sitedown/compare/v2.2.0...v3.0.0)
+[view diff](https://github.com/ungoldman/sitedown/compare/v2.2.0...v3.0.0)
 
 ### Fixes
 - bugfix: add meta viewport to default layout
@@ -130,10 +136,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0
 - engage
 
-[2.2.0]: https://github.com/hypermodules/sitedown/compare/v2.1.2...v2.2.0
-[2.1.2]: https://github.com/hypermodules/sitedown/compare/v2.1.1...v2.1.2
-[2.1.1]: https://github.com/hypermodules/sitedown/compare/v2.1.0...v2.1.1
-[2.1.0]: https://github.com/hypermodules/sitedown/compare/v2.0.1...v2.1.0
-[2.0.1]: https://github.com/hypermodules/sitedown/compare/v2.0.0...v2.0.1
-[2.0.0]: https://github.com/hypermodules/sitedown/compare/v1.1.0...v2.0.0
-[1.1.0]: https://github.com/hypermodules/sitedown/compare/v1.0.0...v1.1.1
+[2.2.0]: https://github.com/ungoldman/sitedown/compare/v2.1.2...v2.2.0
+[2.1.2]: https://github.com/ungoldman/sitedown/compare/v2.1.1...v2.1.2
+[2.1.1]: https://github.com/ungoldman/sitedown/compare/v2.1.0...v2.1.1
+[2.1.0]: https://github.com/ungoldman/sitedown/compare/v2.0.1...v2.1.0
+[2.0.1]: https://github.com/ungoldman/sitedown/compare/v2.0.0...v2.0.1
+[2.0.0]: https://github.com/ungoldman/sitedown/compare/v1.1.0...v2.0.0
+[1.1.0]: https://github.com/ungoldman/sitedown/compare/v1.0.0...v1.1.1
