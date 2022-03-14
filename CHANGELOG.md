@@ -3,11 +3,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## [5.0.1](https://github.com/ungoldman/sitedown/releases/v5.0.1) - 2022-03-13
 
 ### Fixes
 
-- Fix links to reflect ownership transfer (hypermodules -> ungoldman).
+- deps: standard@16
+- Bump highlight.js from 10.7.3 to 11.5.0 (#40)
+- Bump event-stream from 3.3.4 to 4.0.1 (#43)
+- ci: target latest Node LTS only (16)
+- ci: rm automerge (broken)
+- Bump gh-release from 4.0.4 to 6.0.1 (#42)
+- use github actions status badge
+- ownership transfer fixes & updates (#39)
 
 ## [5.0.0](https://github.com/ungoldman/sitedown/releases/v5.0.0) - 2020-12-09
 
