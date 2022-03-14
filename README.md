@@ -6,12 +6,10 @@ Turn some markdown files into a website.
 [![build][build-image]][build-url]
 [![downloads][downloads-image]][npm-url]
 
-
-
 [npm-image]: https://img.shields.io/npm/v/sitedown.svg
 [npm-url]: https://www.npmjs.com/package/sitedown
-[build-image]: https://github.com/ungoldman/sitedown/actions/workflows/test.yml/badge.svg
-[build-url]: https://github.com/ungoldman/sitedown/actions/workflows/test.yml
+[build-image]: https://github.com/ungoldman/sitedown/actions/workflows/tests.yml/badge.svg
+[build-url]: https://github.com/ungoldman/sitedown/actions/workflows/tests.yml
 [downloads-image]: https://img.shields.io/npm/dm/sitedown.svg
 
 ## Overview
