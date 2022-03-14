@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-var sitedown = require('.')
-var clopts = require('cliclopts')([
+const sitedown = require('.')
+const clopts = require('cliclopts')([
   {
     name: 'build',
     abbr: 'b',
@@ -65,7 +65,7 @@ var clopts = require('cliclopts')([
     boolean: true
   }
 ])
-var argv = require('minimist')(process.argv.slice(2), {
+const argv = require('minimist')(process.argv.slice(2), {
   alias: clopts.alias(),
   boolean: clopts.boolean(),
   default: clopts.default()

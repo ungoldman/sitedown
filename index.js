@@ -1,30 +1,30 @@
-var fs = require('fs')
-var path = require('path')
-var readdirp = require('readdirp')
-var mkdirp = require('mkdirp')
-var es = require('event-stream')
-var cheerio = require('cheerio')
-var markdownIt = require('markdown-it')
+const fs = require('fs')
+const path = require('path')
+const readdirp = require('readdirp')
+const mkdirp = require('mkdirp')
+const es = require('event-stream')
+const cheerio = require('cheerio')
+const markdownIt = require('markdown-it')
 
-var mdOpts = {
+const mdOpts = {
   html: true,
   linkify: true,
   typographer: true
 }
 
-var markdownItSub = require('markdown-it-sub')
-var markdownItSup = require('markdown-it-sup')
-var markdownItFootnote = require('markdown-it-footnote')
-var markdownItDeflist = require('markdown-it-deflist')
-var markdownItEmoji = require('markdown-it-emoji')
-var markdownItIns = require('markdown-it-ins')
-var markdownItMark = require('markdown-it-mark')
-var markdownItAbbr = require('markdown-it-abbr')
-var markdownItHighlightjs = require('markdown-it-highlightjs')
-var markdownItGithubHeadings = require('markdown-it-github-headings')
+const markdownItSub = require('markdown-it-sub')
+const markdownItSup = require('markdown-it-sup')
+const markdownItFootnote = require('markdown-it-footnote')
+const markdownItDeflist = require('markdown-it-deflist')
+const markdownItEmoji = require('markdown-it-emoji')
+const markdownItIns = require('markdown-it-ins')
+const markdownItMark = require('markdown-it-mark')
+const markdownItAbbr = require('markdown-it-abbr')
+const markdownItHighlightjs = require('markdown-it-highlightjs')
+const markdownItGithubHeadings = require('markdown-it-github-headings')
 
-var defaultLayout = path.join(__dirname, 'layout.html')
-var encoding = { encoding: 'utf8' }
+const defaultLayout = path.join(__dirname, 'layout.html')
+const encoding = { encoding: 'utf8' }
 
 function noop () {}
 
@@ -47,7 +47,7 @@ function sitedown (options, callback) {
   if (typeof callback === 'undefined') callback = noop
 
   if (!fs.existsSync(options.layout)) {
-    var error = new Error('layout file not found: ' + options.layout)
+    const error = new Error('layout file not found: ' + options.layout)
     if (callback === noop) throw error
     return callback(error)
   }
@@ -81,10 +81,10 @@ function sitedown (options, callback) {
  * @return {String} - md file converted to html
  */
 function mdToHtml (filePath, opts) {
-  var body = fs.readFileSync(filePath, encoding)
+  const body = fs.readFileSync(filePath, encoding)
   if (!opts) opts = {}
 
-  var md = markdownIt(mdOpts)
+  let md = markdownIt(mdOpts)
     .use(markdownItSub)
     .use(markdownItSup)
     .use(markdownItFootnote)
@@ -116,8 +116,8 @@ function mdToHtml (filePath, opts) {
  * @return {String}
  */
 function buildPage (title, body, layout, el) {
-  var page = cheerio.load(layout)
-  var target = el || '.markdown-body'
+  const page = cheerio.load(layout)
+  const target = el || '.markdown-body'
 
   page('title').text(title)
   page(target).append(body)
@@ -139,10 +139,10 @@ function rewriteLinks (body, pretty) {
 
   if (pretty !== false) pretty = true // default to true if omitted
 
-  var regex = /(href=")((?!http[s]*:).*)(\.md|\.markdown)"/g
+  const regex = /(href=")((?!http[s]*:).*)(\.md|\.markdown)"/g
 
   return body.replace(regex, function (match, p1, p2, p3) {
-    var f = p2.toLowerCase()
+    const f = p2.toLowerCase()
 
     // root readme
     if (f === 'readme') return p1 + '/"'
@@ -165,11 +165,11 @@ function rewriteLinks (body, pretty) {
  * @param {Function} callback
  */
 function generateSite (options, callback) {
-  var layout = fs.readFileSync(options.layout, encoding)
+  const layout = fs.readFileSync(options.layout, encoding)
 
   options.files.forEach(function (file) {
-    var parsedFile = path.parse(file)
-    var name = parsedFile.name.toLowerCase()
+    const parsedFile = path.parse(file)
+    const name = parsedFile.name.toLowerCase()
 
     parsedFile.ext = '.html'
 
@@ -187,13 +187,13 @@ function generateSite (options, callback) {
       }
     }
 
-    var dest = path.format(parsedFile)
-    var body = rewriteLinks(mdToHtml(path.join(options.source, file), {
+    const dest = path.format(parsedFile)
+    const body = rewriteLinks(mdToHtml(path.join(options.source, file), {
       githubHeadings: options.githubHeadings,
       noHljsClass: options.noHljsClass
     }), options.pretty)
-    var title = cheerio.load(body)('h1').first().text().trim()
-    var html = buildPage(title, body, layout, options.el)
+    const title = cheerio.load(body)('h1').first().text().trim()
+    const html = buildPage(title, body, layout, options.el)
 
     mkdirp.sync(path.join(options.build, parsedFile.dir))
     fs.writeFileSync(path.join(options.build, dest), html, encoding)
@@ -209,9 +209,9 @@ function generateSite (options, callback) {
  * @param  {Object} options - source, layout, output, silent, files, pretty
  */
 function watch (options) {
-  var gaze = require('gaze')
-  var source = path.resolve(options.source)
-  var layout = options.layout ? path.resolve(process.cwd(), options.layout) : defaultLayout
+  const gaze = require('gaze')
+  const source = path.resolve(options.source)
+  const layout = options.layout ? path.resolve(process.cwd(), options.layout) : defaultLayout
 
   sitedown(options, function (err) {
     if (err) return console.error(err.message)
