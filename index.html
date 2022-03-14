@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="utf-8">
     <title>sitedown</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
@@ -11,17 +9,16 @@
   <body class="serif">
     <nav class="top-bar">
       <div class="top-bar-right">
-        <a class="top-bar-link" href="https://github.com/hypermodules/sitedown/">
+        <a class="top-bar-link" href="https://github.com/ungoldman/sitedown/">
           <i class="fa fa-github-alt"></i> github
         </a>
       </div>
     </nav>
     <main class="markdown-body"><h1>sitedown</h1>
 <p>Turn some markdown files into a website.</p>
-<p><a href="https://www.npmjs.com/package/sitedown"><img src="https://img.shields.io/npm/v/sitedown.svg?style=flat-square" alt="npm"></a>
-<a href="https://travis-ci.org/hypermodules/sitedown"><img src="https://img.shields.io/travis/hypermodules/sitedown.svg?style=flat-square" alt="travis"></a>
-<a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square" alt="standard"></a>
-<a href="https://www.npmjs.com/package/sitedown"><img src="https://img.shields.io/npm/dm/sitedown.svg?style=flat-square" alt="downloads"></a></p>
+<p><a href="https://www.npmjs.com/package/sitedown"><img src="https://img.shields.io/npm/v/sitedown.svg" alt="npm"></a>
+<a href="https://github.com/ungoldman/sitedown/actions/workflows/test.yml"><img src="https://github.com/ungoldman/sitedown/actions/workflows/test.yml/badge.svg" alt="build"></a>
+<a href="https://www.npmjs.com/package/sitedown"><img src="https://img.shields.io/npm/dm/sitedown.svg" alt="downloads"></a></p>
 <h2>Overview</h2>
 <p>Point sitedown at a folder with one or more markdown files and receive one free website!</p>
 <ul>
@@ -32,60 +29,62 @@
 <li>built for making gh-pages sites</li>
 <li>supports subdirectories too</li>
 </ul>
-<p>Sitedown&#x2019;s <a href="https://hypermodules.github.io/sitedown">website</a> was built with sitedown, so you know it&#x2019;s <em>for real</em>.</p>
+<p>Sitedown’s <a href="https://ungoldman.github.io/sitedown">website</a> was built with sitedown, so you know it’s <em>for real</em>.</p>
 <h2>Install</h2>
-<pre><code>npm install sitedown
+<pre><code class="hljs">npm install sitedown
 </code></pre>
 <h2>Usage</h2>
 <h3>CLI</h3>
-<pre><code class="language-console"><span class="hljs-meta">$</span><span class="bash"> sitedown --<span class="hljs-built_in">help</span></span>
+<pre><code class="hljs language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">sitedown --<span class="hljs-built_in">help</span></span>
 Usage: sitedown [source] [options]
 
     Example: sitedown source/ -b build/ -l layout.html
 
     source                path to source directory (default: current working directory)
-    --build, -b           path to build directory (default: &quot;build&quot;)
+    --build, -b           path to build directory (default: "build")
     --pretty              use directory indexes for pretty URLs (default: true)
+    --el, -e              css selector for target element (default: ".markdown-body")
     --layout, -l          path to layout file
-    --el, -e              css selector for target element (default: &quot;.markdown-body&quot;)
     --github-headings, -g add anchors to headings just like GitHub (default: false)
+    --no-hljs-class, -c   don't add the hljs class to codeblocks (default: false)
     --silent, -s          make less noise during build
     --watch, -w           watch a directory or file (experimental)
     --version, -v         show version information
     --help, -h            show help
 </code></pre>
-<p><strong>Protip</strong>: You <em>can</em> install a node command line utility globally (<code>npm install --global sitedown</code>), but it&#x2019;s usually <em>better</em> to install it locally (<code>npm install --save-dev sitedown</code>) and access it via <code>package.json</code> scripts (e.g. <code>&quot;build-site&quot;: &quot;sitedown .&quot;</code>). This way you don&#x2019;t pollute the global environment with random scripts and your utility is saved and versioned side by side with your project. &#x2728;</p>
+<p><strong>Protip</strong>: You <em>can</em> install a node command line utility globally (<code>npm install --global sitedown</code>), but it’s usually <em>better</em> to install it locally (<code>npm install --save-dev sitedown</code>) and access it via <code>package.json</code> scripts (e.g. <code>"build-site": "sitedown ."</code>). This way you don’t pollute the global environment with random scripts and your utility is saved and versioned side by side with your project. ✨</p>
 <h3>Node API</h3>
-<pre><code class="language-js"><span class="hljs-keyword">var</span> sitedown = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;sitedown&apos;</span>)
+<pre><code class="hljs language-js"><span class="hljs-keyword">var</span> sitedown = <span class="hljs-built_in">require</span>(<span class="hljs-string">'sitedown'</span>)
 
 <span class="hljs-keyword">var</span> options = {
-  <span class="hljs-attr">source</span>: <span class="hljs-string">&apos;.&apos;</span>,            <span class="hljs-comment">// path to source directory                 default: cwd</span>
-  build: <span class="hljs-string">&apos;build&apos;</span>,         <span class="hljs-comment">// path to build directory                  default: &apos;build&apos; in cwd</span>
-  pretty: <span class="hljs-literal">true</span>,           <span class="hljs-comment">// use directory indexes for pretty URLs    default: true</span>
-  el: <span class="hljs-string">&apos;.markdown-body&apos;</span>,   <span class="hljs-comment">// css selector for target element          default: &apos;.markdown-body&apos;</span>
-  layout: <span class="hljs-string">&apos;layout.html&apos;</span>,  <span class="hljs-comment">// path to layout                           default: none</span>
-  githubHeadings: <span class="hljs-literal">false</span>   <span class="hljs-comment">// add anchors to headings just like GitHub default: false</span>
-  silent: <span class="hljs-literal">false</span>           <span class="hljs-comment">// make less noise during build             default: false</span>
+  <span class="hljs-attr">source</span>: <span class="hljs-string">'.'</span>,            <span class="hljs-comment">// path to source directory                 default: cwd</span>
+  <span class="hljs-attr">build</span>: <span class="hljs-string">'build'</span>,         <span class="hljs-comment">// path to build directory                  default: 'build' in cwd</span>
+  <span class="hljs-attr">pretty</span>: <span class="hljs-literal">true</span>,           <span class="hljs-comment">// use directory indexes for pretty URLs    default: true</span>
+  <span class="hljs-attr">el</span>: <span class="hljs-string">'.markdown-body'</span>,   <span class="hljs-comment">// css selector for target element          default: '.markdown-body'</span>
+  <span class="hljs-attr">layout</span>: <span class="hljs-string">'layout.html'</span>,  <span class="hljs-comment">// path to layout                           default: none</span>
+  <span class="hljs-attr">githubHeadings</span>: <span class="hljs-literal">false</span>,  <span class="hljs-comment">// add anchors to headings just like GitHub default: false</span>
+  <span class="hljs-attr">noHljsClass</span>: <span class="hljs-literal">false</span>,     <span class="hljs-comment">// don't add hljs class to codeblocks       default: false</span>
+  <span class="hljs-attr">silent</span>: <span class="hljs-literal">false</span>           <span class="hljs-comment">// make less noise during build             default: false</span>
 }
 
-sitedown(options, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
-  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.error(err)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;success&apos;</span>)
+<span class="hljs-title function_">sitedown</span>(options, <span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) {
+  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(err)
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'success'</span>)
 })
 </code></pre>
 <h3>Layout</h3>
 <p>All files are wrapped in a <code>layout.html</code> file. Markdown content is appended to the first <code>.markdown-body</code> element, and the page title (<code>&lt;title&gt;</code> in <code>&lt;head&gt;</code>) is set to the text of the first <code>h1</code> element.</p>
 <p>The default layout is:</p>
-<pre><code class="language-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+<pre><code class="hljs language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://unpkg.com/style.css&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://unpkg.com/style.css"</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;markdown-body&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"markdown-body"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 </code></pre>
@@ -96,7 +95,7 @@ sitedown(options, <span class="hljs-function"><span class="hljs-keyword">functio
 <p>Relative links that point to markdown files (<code>$f.md</code>, <code>$f.markdown</code>) are rewritten as <code>$f/</code> to point to their <code>$f/index.html</code> equivalent.</p>
 <h3>Example</h3>
 <p>Given a directory like this:</p>
-<pre><code>- .gitignore
+<pre><code class="hljs">- .gitignore
 - .travis.yml
 - bin.js
 - CHANGELOG.md
@@ -110,8 +109,8 @@ sitedown(options, <span class="hljs-function"><span class="hljs-keyword">functio
   + markdown/
     - README.md
 </code></pre>
-<p>Sitedown&#x2019;s default options will produce a directory like this:</p>
-<pre><code>- index.html
+<p>Sitedown’s default options will produce a directory like this:</p>
+<pre><code class="hljs">- index.html
 + changelog/
   - index.html
 + contributing/
@@ -128,7 +127,8 @@ sitedown(options, <span class="hljs-function"><span class="hljs-keyword">functio
 <p><a href="license/">ISC</a></p>
 </main>
     <footer>
-      <a href="https://hypermodul.es"><small><i class="fa fa-paper-plane" aria-hidden="true"></i></small></a>
+      <a href="https://github.com/ungoldman"><small><i class="fa fa-paper-plane" aria-hidden="true"></i></small></a>
     </footer>
-  </body>
-</html>
+  
+
+</body></html>
