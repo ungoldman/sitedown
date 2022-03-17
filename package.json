@@ -65,6 +65,7 @@
     "site": "run-s site:*",
     "site:clean": "rm -rf site",
     "site:html": "./bin.js . -b site -l docs/layout.html",
+    "site:img": "cp page.png site/",
     "start": "npm-run-all site --parallel serve:*",
     "test": "tape test/*.js | tap-spec"
   }

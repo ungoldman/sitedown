@@ -1,3 +1,7 @@
+<div class="hero" align="center">
+
+<img src="./page.png">
+
 # sitedown
 
 Turn some markdown files into a website.
@@ -11,6 +15,8 @@ Turn some markdown files into a website.
 [build-image]: https://github.com/ungoldman/sitedown/actions/workflows/tests.yml/badge.svg
 [build-url]: https://github.com/ungoldman/sitedown/actions/workflows/tests.yml
 [downloads-image]: https://img.shields.io/npm/dm/sitedown.svg
+
+</div>
 
 ## Overview
 
@@ -151,3 +157,5 @@ Contributions welcome! Please read the [contributing guidelines](CONTRIBUTING.md
 ## License
 
 [ISC](LICENSE.md)
+
+Page image is from [emojipedia](https://emojipedia.org/page-facing-up/).
