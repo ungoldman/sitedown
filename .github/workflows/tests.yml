@@ -9,10 +9,16 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [14, 16]
+
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
+    - name: Use Node.js ${{ matrix.node }}
+      uses: actions/setup-node@v3
       with:
-        node-version: lts/*
+        node-version: ${{ matrix.node }}
     - run: npm i
     - run: npm test
