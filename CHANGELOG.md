@@ -1,7 +1,18 @@
-# sitedown change log
+# sitedown changelog
 
 All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
+
+The format is based on [Keep a Changelog](https://keepachangelog.com).
+
+This project adheres to [Semantic Versioning](https://semver.org).
+
+## [5.0.2](https://github.com/ungoldman/sitedown/releases/v5.0.2) - 2022-04-21
+
+### Fixes
+
+- explicitly set minimum node version to 14 in `engines` field of `package.json`
+
+Minimum node version was already 14 since [v5.0.0](https://github.com/ungoldman/sitedown/releases/v5.0.0). This patch makes it more obvious to downstream module consumers.
 
 ## [5.0.1](https://github.com/ungoldman/sitedown/releases/v5.0.1) - 2022-03-13
 
