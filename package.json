@@ -38,7 +38,7 @@
     "rimraf": "^3.0.2",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
-    "tap-spec": "^5.0.0",
+    "tap-arc": "^0.3.4",
     "tape": "^5.0.1"
   },
   "homepage": "https://github.com/ungoldman/sitedown",
@@ -67,6 +67,6 @@
     "site:html": "./bin.js . -b site -l docs/layout.html",
     "site:img": "cp page.png site/",
     "start": "npm-run-all site --parallel serve:*",
-    "test": "tape test/*.js | tap-spec"
+    "test": "tape test/*.js | tap-arc"
   }
 }
