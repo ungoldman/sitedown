@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com).
 
 This project adheres to [Semantic Versioning](https://semver.org).
 
+## [5.0.3](https://github.com/ungoldman/sitedown/releases/v5.0.3) - 2022-04-21
+
+### Fixes
+
+- ignore documentation artifacts (page.png, docs/) when publishing
+
 ## [5.0.2](https://github.com/ungoldman/sitedown/releases/v5.0.2) - 2022-04-21
 
 ### Fixes
