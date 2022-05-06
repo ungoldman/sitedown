@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const { spawn } = require('child_process')
 const readdirp = require('readdirp')
 const mkdirp = require('mkdirp')
 const es = require('event-stream')
@@ -43,6 +44,7 @@ function sitedown (options, callback) {
   options.pretty = options.pretty !== false
   options.el = options.el || '.markdown-body'
   options.files = []
+  options.assets = options.assets || 'assets'
 
   if (typeof callback === 'undefined') callback = noop
 
@@ -69,8 +71,19 @@ function sitedown (options, callback) {
       options.files.push(file)
     })
     .on('end', function () {
-      generateSite(options, callback)
+      generateSite(options, _ => {
+        copyAssets(options.assets, options.build)
+        callback(null)
+      })
     })
+}
+
+function copyAssets (source, dest) {
+  if (fs.existsSync(source)) {
+    spawn('cp', ['-R', '-v', source, dest], { stdio: 'inherit' })
+  } else {
+    console.log('❌ no assets found, skipping')
+  }
 }
 
 /**
@@ -197,7 +210,7 @@ function generateSite (options, callback) {
 
     mkdirp.sync(path.join(options.build, parsedFile.dir))
     fs.writeFileSync(path.join(options.build, dest), html, encoding)
-    if (!options.silent) console.log('✓ built', dest)
+    if (!options.silent) console.log('✅ built', dest)
   })
 
   callback(null)
@@ -208,13 +221,15 @@ function generateSite (options, callback) {
  *
  * @param  {Object} options - source, layout, output, silent, files, pretty
  */
-function watch (options) {
+function watch (options, callback) {
   const gaze = require('gaze')
   const source = path.resolve(options.source)
   const layout = options.layout ? path.resolve(process.cwd(), options.layout) : defaultLayout
 
   sitedown(options, function (err) {
     if (err) return console.error(err.message)
+
+    callback(err)
 
     gaze(['**/*.md', layout], { cwd: source }, function (err, watcher) {
       if (err) console.error(err.message)
@@ -232,10 +247,20 @@ function watch (options) {
   })
 }
 
+function dev (options) {
+  sitedown.watch(options, _ => {
+    const execPath = path.join(__dirname, './node_modules/.bin/serve')
+    const proc = spawn(execPath, [options.build], { stdio: 'inherit' })
+
+    proc.on('close', code => process.exit(code))
+  })
+}
+
 sitedown.mdToHtml = mdToHtml
 sitedown.buildPage = buildPage
 sitedown.rewriteLinks = rewriteLinks
 sitedown.generateSite = generateSite
 sitedown.watch = watch
+sitedown.dev = dev
 
 module.exports = sitedown

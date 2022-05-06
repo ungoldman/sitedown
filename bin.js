@@ -9,6 +9,18 @@ const clopts = require('cliclopts')([
     default: 'build'
   },
   {
+    name: 'dev',
+    abbr: 'd',
+    help: 'start development server',
+    default: false
+  },
+  {
+    name: 'assets',
+    abbr: 'a',
+    help: 'assets folder to copy',
+    default: 'assets'
+  },
+  {
     name: 'pretty',
     help: 'use directory indexes for pretty URLs',
     boolean: true,
@@ -88,7 +100,9 @@ argv.source = argv.source || argv._[0] || '.'
 argv.build = argv.build || 'build'
 argv.silent = argv.silent || false
 
-if (argv.watch) {
+if (argv.dev) {
+  sitedown.dev(argv)
+} else if (argv.watch) {
   sitedown.watch(argv)
 } else {
   sitedown(argv, function (err) {

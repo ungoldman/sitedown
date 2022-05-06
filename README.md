@@ -1,6 +1,6 @@
 <div class="hero" align="center">
 
-<img src="./page.png">
+<img src="./assets/page.png">
 
 # sitedown
 
