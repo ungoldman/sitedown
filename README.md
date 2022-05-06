@@ -42,10 +42,9 @@ npm install sitedown
 ### CLI
 
 ```console
-$ sitedown --help
 Usage: sitedown [source] [options]
 
-    Example: sitedown source/ -b build/ -l layout.html
+    Example: sitedown . -b dist -l layout.html
 
     source                path to source directory (default: current working directory)
     --build, -b           path to build directory (default: "build")
@@ -53,9 +52,11 @@ Usage: sitedown [source] [options]
     --el, -e              css selector for target element (default: ".markdown-body")
     --layout, -l          path to layout file
     --github-headings, -g add anchors to headings just like GitHub (default: false)
-    --no-hljs-class, -c   don't add the hljs class to codeblocks (default: false)
+    --no-hljs-class       don't add the hljs class to codeblocks (default: false)
     --silent, -s          make less noise during build
     --watch, -w           watch a directory or file (experimental)
+    --dev, -d             start development server (experimental) (default: false)
+    --assets, -a          assets folder to copy (default: "assets")
     --version, -v         show version information
     --help, -h            show help
 ```
