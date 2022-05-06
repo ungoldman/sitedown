@@ -9,18 +9,6 @@ const clopts = require('cliclopts')([
     default: 'build'
   },
   {
-    name: 'dev',
-    abbr: 'd',
-    help: 'start development server',
-    default: false
-  },
-  {
-    name: 'assets',
-    abbr: 'a',
-    help: 'assets folder to copy',
-    default: 'assets'
-  },
-  {
     name: 'pretty',
     help: 'use directory indexes for pretty URLs',
     boolean: true,
@@ -65,6 +53,18 @@ const clopts = require('cliclopts')([
     boolean: true
   },
   {
+    name: 'dev',
+    abbr: 'd',
+    help: 'start development server (experimental)',
+    default: false
+  },
+  {
+    name: 'assets',
+    abbr: 'a',
+    help: 'assets folder to copy',
+    default: 'assets'
+  },
+  {
     name: 'version',
     abbr: 'v',
     boolean: true,
@@ -90,7 +90,7 @@ if (argv.version) {
 
 if (argv.help) {
   console.log('Usage: sitedown [source] [options]\n')
-  console.log('    Example: sitedown source/ -b build/ -l layout.html\n')
+  console.log('    Example: sitedown . -b dist -l layout.html\n')
   console.log('    source                path to source directory (default: current working directory)')
   clopts.print()
   process.exit(0)
