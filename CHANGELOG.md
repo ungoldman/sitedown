@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com).
 
 This project adheres to [Semantic Versioning](https://semver.org).
 
+## [5.1.0](https://github.com/ungoldman/sitedown/releases/v5.1.0) - 2022-05-06
+
+### Features
+
+- add `dev` option to start local development server
+- add `assets` option to copy any asset files to build
+
 ## [5.0.3](https://github.com/ungoldman/sitedown/releases/v5.0.3) - 2022-04-21
 
 ### Fixes
