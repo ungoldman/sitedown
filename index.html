@@ -26,7 +26,7 @@
 <a href="https://www.npmjs.com/package/sitedown"><img src="https://img.shields.io/npm/dm/sitedown.svg" alt="downloads"></a></p>
 </div>
 <h2>Overview</h2>
-<p>Sitedown turns a folder with Markdown files into a static HTML website.</p>
+<p>Sitedown turns a folder with Markdown files into a static HTML site.</p>
 <pre><code class="hljs">.                              build/
 ├─ README.md         ==&gt;       ├─ index.html
 ├─ about.md          ==&gt;       └─ about/
@@ -40,7 +40,7 @@
 └─ assets/                     └─ assets/
    └─ cat.jpg        ==&gt;          └─ cat.jpg
 </code></pre>
-<p>By default, it will collect all markdown files in the current directory and create a new generated website in the <code>build</code> directory, mirroring the source directory structure.</p>
+<p>It takes all markdown files in the current folder (and subfolders) and generates a new site in the <code>build</code> directory.</p>
 <ul>
 <li>Converts <code>README.md</code> files into indexes (<code>index.html</code>).</li>
 <li>Creates directory indexes for pretty URLs (<code>CHANGELOG.md</code> =&gt; <code>changelog/index.html</code>).</li>
