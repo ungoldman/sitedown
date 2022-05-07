@@ -20,29 +20,34 @@ Sitedown is a minimal [Markdown](https://www.markdownguide.org/getting-started/)
 
 ## Overview
 
-Sitedown transforms a collection of markdown files in a folder into a website.
+Sitedown turns a folder with Markdown files into a static HTML website.
 
 ```
-- README.md                   - index.html
-- about.md                    + about/
-                                - index.html
-+ docs/                       + docs/
-  - README.md                   - index.html
-  - ref.md                      + ref/
-                                  - index.html
-+ assets/                     + assets/
-  - cat.jpg                     - cat.jpg
+.                              build/
+├─ README.md         ==>       ├─ index.html
+├─ about.md          ==>       └─ about/
+│                              │  └─ index.html
+│                              │
+├─ docs/             ==>       └─ docs/
+│  ├─ README.md      ==>       │  ├─ index.html
+│  └─ ref.md         ==>       │  └─ ref/
+│                              │     └─ index.html
+│                              │
+└─ assets/           ==>       └─ assets/
+   └─ cat.jpg        ==>          └─ cat.jpg
 ```
 
-By default, it will collect all markdown files in the current directory and create a new generated website in the `build` directory.
+By default, it will collect all markdown files in the current directory and create a new generated website in the `build` directory, mirroring the source directory structure.
 
-- converts your `README.md` into a `index.html`
-- creates directory indexes for pretty URLs (`CHANGELOG.md` becomes `changelog/index.html`)
-- accepts a `layout.html` file (comes with a default one too)
-- copies any assets in the `assets` folder
-- has a dev mode for easy local development
+- Converts `README.md` files into indexes (`index.html`).
+- Creates directory indexes for pretty URLs (`CHANGELOG.md` => `changelog/index.html`).
+- Supports custom layouts (comes with a default `layout.html`).
+- Copies assets (defaults to copying over contents of `assets` folder).
+- Comes with a `dev` mode that starts a server and watches for changes for easy local development.
 
 Sitedown's [website](https://ungoldman.github.io/sitedown) was built with sitedown, so you know it's *for real*.
+
+Read the [Usage](#usage) section for a full overview of options and defaults.
 
 ## Install
 
