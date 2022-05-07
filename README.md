@@ -28,12 +28,12 @@ Sitedown turns a folder with Markdown files into a static HTML website.
 ├─ about.md          ==>       └─ about/
 │                              │  └─ index.html
 │                              │
-├─ docs/             ==>       └─ docs/
+├─ docs/                       └─ docs/
 │  ├─ README.md      ==>       │  ├─ index.html
 │  └─ ref.md         ==>       │  └─ ref/
 │                              │     └─ index.html
 │                              │
-└─ assets/           ==>       └─ assets/
+└─ assets/                     └─ assets/
    └─ cat.jpg        ==>          └─ cat.jpg
 ```
 
