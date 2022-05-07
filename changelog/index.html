@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>sitedown change log</title>
+    <title>sitedown changelog</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
     <link rel="stylesheet" href="https://ungoldman.github.io/style.css/site.css">
@@ -17,9 +17,32 @@
         <a class="top-bar-link" href="https://github.com/ungoldman/sitedown">🐈 github</a>
       </div>
     </nav>
-    <main class="markdown-body"><h1>sitedown change log</h1>
-<p>All notable changes to this project will be documented in this file.
-This project adheres to <a href="http://semver.org/">Semantic Versioning</a>.</p>
+    <main class="markdown-body"><h1>sitedown changelog</h1>
+<p>All notable changes to this project will be documented in this file.</p>
+<p>The format is based on <a href="https://keepachangelog.com">Keep a Changelog</a>.</p>
+<p>This project adheres to <a href="https://semver.org">Semantic Versioning</a>.</p>
+<h2><a href="https://github.com/ungoldman/sitedown/releases/v5.1.1">5.1.1</a> - 2022-05-06</h2>
+<h3>Fix</h3>
+<ul>
+<li>resolve bin path problem for <code>dev</code> mode</li>
+</ul>
+<h2><a href="https://github.com/ungoldman/sitedown/releases/v5.1.0">5.1.0</a> - 2022-05-06</h2>
+<h3>Features</h3>
+<ul>
+<li>add <code>dev</code> option to start local development server</li>
+<li>add <code>assets</code> option to copy any asset files to build</li>
+</ul>
+<h2><a href="https://github.com/ungoldman/sitedown/releases/v5.0.3">5.0.3</a> - 2022-04-21</h2>
+<h3>Fixes</h3>
+<ul>
+<li>ignore documentation artifacts (page.png, docs/) when publishing</li>
+</ul>
+<h2><a href="https://github.com/ungoldman/sitedown/releases/v5.0.2">5.0.2</a> - 2022-04-21</h2>
+<h3>Fixes</h3>
+<ul>
+<li>explicitly set minimum node version to 14 in <code>engines</code> field of <code>package.json</code></li>
+</ul>
+<p>Minimum node version was already 14 since <a href="https://github.com/ungoldman/sitedown/releases/v5.0.0">v5.0.0</a>. This patch makes it more obvious to downstream module consumers.</p>
 <h2><a href="https://github.com/ungoldman/sitedown/releases/v5.0.1">5.0.1</a> - 2022-03-13</h2>
 <h3>Fixes</h3>
 <ul>

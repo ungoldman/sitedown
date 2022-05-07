@@ -18,33 +18,46 @@
       </div>
     </nav>
     <main class="markdown-body"><div class="hero" align="center">
-<img src="./page.png">
+<img src="./assets/page.png">
 <h1>sitedown</h1>
-<p>Turn some markdown files into a website.</p>
+<p>Sitedown is a minimal <a href="https://www.markdownguide.org/getting-started/">Markdown</a>-based static site generator.</p>
 <p><a href="https://www.npmjs.com/package/sitedown"><img src="https://img.shields.io/npm/v/sitedown.svg" alt="npm"></a>
 <a href="https://github.com/ungoldman/sitedown/actions/workflows/tests.yml"><img src="https://github.com/ungoldman/sitedown/actions/workflows/tests.yml/badge.svg" alt="build"></a>
 <a href="https://www.npmjs.com/package/sitedown"><img src="https://img.shields.io/npm/dm/sitedown.svg" alt="downloads"></a></p>
 </div>
 <h2>Overview</h2>
-<p>Point sitedown at a folder with one or more markdown files and receive one free website!</p>
+<p>Sitedown turns a folder with Markdown files into a static HTML website.</p>
+<pre><code class="hljs">.                              build/
+├─ README.md         ==&gt;       ├─ index.html
+├─ about.md          ==&gt;       └─ about/
+│                              │  └─ index.html
+│                              │
+├─ docs/                       └─ docs/
+│  ├─ README.md      ==&gt;       │  ├─ index.html
+│  └─ ref.md         ==&gt;       │  └─ ref/
+│                              │     └─ index.html
+│                              │
+└─ assets/                     └─ assets/
+   └─ cat.jpg        ==&gt;          └─ cat.jpg
+</code></pre>
+<p>By default, it will collect all markdown files in the current directory and create a new generated website in the <code>build</code> directory, mirroring the source directory structure.</p>
 <ul>
-<li>converts your <code>README.md</code> into a <code>index.html</code></li>
-<li>creates directory indexes (<code>CHANGELOG.md</code> becomes <code>changelog/index.html</code>)</li>
-<li>accepts a layout file (comes with a default one too)</li>
-<li>has an experimental watch mode for working on a project locally</li>
-<li>built for making gh-pages sites</li>
-<li>supports subdirectories too</li>
+<li>Converts <code>README.md</code> files into indexes (<code>index.html</code>).</li>
+<li>Creates directory indexes for pretty URLs (<code>CHANGELOG.md</code> =&gt; <code>changelog/index.html</code>).</li>
+<li>Supports custom layouts (comes with a default <code>layout.html</code>).</li>
+<li>Copies assets (defaults to copying over contents of <code>assets</code> folder).</li>
+<li>Comes with a <code>dev</code> mode that starts a server and watches for changes for easy local development.</li>
 </ul>
 <p>Sitedown’s <a href="https://ungoldman.github.io/sitedown">website</a> was built with sitedown, so you know it’s <em>for real</em>.</p>
+<p>Read the <a href="#usage">Usage</a> section for a full overview of options and defaults.</p>
 <h2>Install</h2>
 <pre><code class="hljs">npm install sitedown
 </code></pre>
 <h2>Usage</h2>
 <h3>CLI</h3>
-<pre><code class="hljs language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">sitedown --<span class="hljs-built_in">help</span></span>
-Usage: sitedown [source] [options]
+<pre><code class="hljs language-console">Usage: sitedown [source] [options]
 
-    Example: sitedown source/ -b build/ -l layout.html
+    Example: sitedown . -b dist -l layout.html
 
     source                path to source directory (default: current working directory)
     --build, -b           path to build directory (default: "build")
@@ -52,13 +65,14 @@ Usage: sitedown [source] [options]
     --el, -e              css selector for target element (default: ".markdown-body")
     --layout, -l          path to layout file
     --github-headings, -g add anchors to headings just like GitHub (default: false)
-    --no-hljs-class, -c   don't add the hljs class to codeblocks (default: false)
+    --no-hljs-class       don't add the hljs class to codeblocks (default: false)
     --silent, -s          make less noise during build
     --watch, -w           watch a directory or file (experimental)
+    --dev, -d             start development server (experimental) (default: false)
+    --assets, -a          assets folder to copy (default: "assets")
     --version, -v         show version information
     --help, -h            show help
 </code></pre>
-<p><strong>Protip</strong>: You <em>can</em> install a node command line utility globally (<code>npm install --global sitedown</code>), but it’s usually <em>better</em> to install it locally (<code>npm install --save-dev sitedown</code>) and access it via <code>package.json</code> scripts (e.g. <code>"build-site": "sitedown ."</code>). This way you don’t pollute the global environment with random scripts and your utility is saved and versioned side by side with your project. ✨</p>
 <h3>Node API</h3>
 <pre><code class="hljs language-js"><span class="hljs-keyword">var</span> sitedown = <span class="hljs-built_in">require</span>(<span class="hljs-string">'sitedown'</span>)
 
@@ -99,34 +113,6 @@ Usage: sitedown [source] [options]
 <p>Markdown files (<code>$f.md</code>, <code>$f.markdown</code>) are lowercased and parsed into <code>$f/index.html</code> files. Directory indexes can be disabled with the <code>pretty: false</code> option. <code>README.md</code> files are always converted to directory indexes (<code>index.html</code>).</p>
 <h3>Links</h3>
 <p>Relative links that point to markdown files (<code>$f.md</code>, <code>$f.markdown</code>) are rewritten as <code>$f/</code> to point to their <code>$f/index.html</code> equivalent.</p>
-<h3>Example</h3>
-<p>Given a directory like this:</p>
-<pre><code class="hljs">- .gitignore
-- .travis.yml
-- bin.js
-- CHANGELOG.md
-- CONTRIBUTING.md
-- index.js
-- LICENSE.md
-- package.json
-- README.md
-+ test/
-  - index.js
-  + markdown/
-    - README.md
-</code></pre>
-<p>Sitedown’s default options will produce a directory like this:</p>
-<pre><code class="hljs">- index.html
-+ changelog/
-  - index.html
-+ contributing/
-  - index.html
-+ license/
-  - index.html
-+ test/
-  + markdown/
-    - index.html
-</code></pre>
 <h2>Contributing</h2>
 <p>Contributions welcome! Please read the <a href="contributing/">contributing guidelines</a> first.</p>
 <h2>License</h2>
