@@ -4,7 +4,7 @@
 
 # sitedown
 
-Turn some markdown files into a website.
+Sitedown is a minimal [Markdown](https://www.markdownguide.org/getting-started/)-based static site generator.
 
 [![npm][npm-image]][npm-url]
 [![build][build-image]][build-url]
@@ -20,14 +20,27 @@ Turn some markdown files into a website.
 
 ## Overview
 
-Point sitedown at a folder with one or more markdown files and receive one free website!
+Sitedown transforms a collection of markdown files in a folder into a website.
+
+```
+- README.md                   - index.html
+- about.md                    + about/
+                                - index.html
++ docs/                       + docs/
+  - README.md                   - index.html
+  - ref.md                      + ref/
+                                  - index.html
++ assets/                     + assets/
+  - cat.jpg                     - cat.jpg
+```
+
+By default, it will collect all markdown files in the current directory and create a new generated website in the `build` directory.
 
 - converts your `README.md` into a `index.html`
-- creates directory indexes (`CHANGELOG.md` becomes `changelog/index.html`)
-- accepts a layout file (comes with a default one too)
-- has an experimental watch mode for working on a project locally
-- built for making gh-pages sites
-- supports subdirectories too
+- creates directory indexes for pretty URLs (`CHANGELOG.md` becomes `changelog/index.html`)
+- accepts a `layout.html` file (comes with a default one too)
+- copies any assets in the `assets` folder
+- has a dev mode for easy local development
 
 Sitedown's [website](https://ungoldman.github.io/sitedown) was built with sitedown, so you know it's *for real*.
 
@@ -60,8 +73,6 @@ Usage: sitedown [source] [options]
     --version, -v         show version information
     --help, -h            show help
 ```
-
-**Protip**: You *can* install a node command line utility globally (`npm install --global sitedown`), but it's usually *better* to install it locally (`npm install --save-dev sitedown`) and access it via `package.json` scripts (e.g. `"build-site": "sitedown ."`). This way you don't pollute the global environment with random scripts and your utility is saved and versioned side by side with your project. :sparkles:
 
 ### Node API
 
@@ -115,41 +126,6 @@ Markdown files (`$f.md`, `$f.markdown`) are lowercased and parsed into `$f/index
 ### Links
 
 Relative links that point to markdown files (`$f.md`, `$f.markdown`) are rewritten as `$f/` to point to their `$f/index.html` equivalent.
-
-### Example
-
-Given a directory like this:
-
-```
-- .gitignore
-- .travis.yml
-- bin.js
-- CHANGELOG.md
-- CONTRIBUTING.md
-- index.js
-- LICENSE.md
-- package.json
-- README.md
-+ test/
-  - index.js
-  + markdown/
-    - README.md
-```
-
-Sitedown's default options will produce a directory like this:
-
-```
-- index.html
-+ changelog/
-  - index.html
-+ contributing/
-  - index.html
-+ license/
-  - index.html
-+ test/
-  + markdown/
-    - index.html
-```
 
 ## Contributing
 

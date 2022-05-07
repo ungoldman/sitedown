@@ -1,6 +1,6 @@
 {
   "name": "sitedown",
-  "description": "Generate a static HTML site from a collection of markdown files.",
+  "description": "Minimal Markdown-based static site generator.",
   "version": "5.0.3",
   "author": "Nate Goldman <ungoldman@gmail.com>",
   "bin": {
