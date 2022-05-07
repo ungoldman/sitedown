@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com).
 
 This project adheres to [Semantic Versioning](https://semver.org).
 
+## [5.1.1](https://github.com/ungoldman/sitedown/releases/v5.1.1) - 2022-05-06
+
+### Fix
+
+- resolve bin path problem for `dev` mode
+
 ## [5.1.0](https://github.com/ungoldman/sitedown/releases/v5.1.0) - 2022-05-06
 
 ### Features
