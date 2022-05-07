@@ -20,7 +20,7 @@ Sitedown is a minimal [Markdown](https://www.markdownguide.org/getting-started/)
 
 ## Overview
 
-Sitedown turns a folder with Markdown files into a static HTML website.
+Sitedown turns a folder with Markdown files into a static HTML site.
 
 ```
 .                              build/
@@ -37,7 +37,7 @@ Sitedown turns a folder with Markdown files into a static HTML website.
    └─ cat.jpg        ==>          └─ cat.jpg
 ```
 
-By default, it will collect all markdown files in the current directory and create a new generated website in the `build` directory, mirroring the source directory structure.
+It takes all markdown files in the current folder (and subfolders) and generates a new site in the `build` directory.
 
 - Converts `README.md` files into indexes (`index.html`).
 - Creates directory indexes for pretty URLs (`CHANGELOG.md` => `changelog/index.html`).
