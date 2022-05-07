@@ -249,7 +249,8 @@ function watch (options, callback) {
 
 function dev (options) {
   sitedown.watch(options, _ => {
-    const execPath = path.join(__dirname, './node_modules/.bin/serve')
+    // dirty hack
+    const execPath = require.resolve('@ungoldman/serve/bin/serve.js')
     const proc = spawn(execPath, [options.build], { stdio: 'inherit' })
 
     proc.on('close', code => process.exit(code))
