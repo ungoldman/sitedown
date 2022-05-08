@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com).
 
 This project adheres to [Semantic Versioning](https://semver.org).
 
+## [5.1.2](https://github.com/ungoldman/sitedown/releases/v5.1.2) - 2022-05-07
+
+### Fix
+
+- fix uncaught error when no callback is provided for watch
+
 ## [5.1.1](https://github.com/ungoldman/sitedown/releases/v5.1.1) - 2022-05-06
 
 ### Fix
