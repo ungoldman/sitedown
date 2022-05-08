@@ -213,7 +213,7 @@ function generateSite (options, callback) {
     if (!options.silent) console.log('✅ built', dest)
   })
 
-  callback(null)
+  if (typeof callback === 'function') callback(null)
 }
 
 /**
@@ -229,7 +229,7 @@ function watch (options, callback) {
   sitedown(options, function (err) {
     if (err) return console.error(err.message)
 
-    callback(err)
+    if (typeof callback === 'function') callback(err)
 
     gaze(['**/*.md', layout], { cwd: source }, function (err, watcher) {
       if (err) console.error(err.message)
