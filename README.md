@@ -4,7 +4,7 @@
 
 # sitedown
 
-Sitedown is a minimal [Markdown](https://www.markdownguide.org/getting-started/)-based static site generator.
+Minimalist [Markdown](https://www.markdownguide.org/getting-started/)-based static site generator.
 
 [![npm][npm-image]][npm-url]
 [![build][build-image]][build-url]
