@@ -35,7 +35,6 @@
     "gh-pages": "^4.0.0",
     "gh-release": "^7.0.0",
     "npm-run-all2": "^6.0.0",
-    "rimraf": "^3.0.2",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
     "tap-arc": "^0.3.4",

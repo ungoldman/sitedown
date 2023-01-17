@@ -1,11 +1,12 @@
 const fs = require('fs')
 const path = require('path')
-const rimraf = require('rimraf')
 const test = require('tape')
 const sitedown = require('../')
+
 const enc = { encoding: 'utf8' }
 const layout = '<title></title><main class="markdown-body"></main>'
 const customElementLayout = '<title></title><main class="i-love-spiderman"></main>'
+const rimrafOpts = { recursive: true, force: true }
 
 test('markdown to html', function (t) {
   const file = path.join(__dirname, 'fixtures', 'md', 'README.md')
@@ -94,7 +95,7 @@ test('site generation', function (t) {
     hljsHighlights: true
   }
 
-  rimraf(opts.build, generateSite)
+  fs.rm(opts.build, rimrafOpts, generateSite)
 
   function generateSite () {
     sitedown(opts, function (err) {
@@ -117,7 +118,7 @@ test('site generation', function (t) {
       t.ok(multititle, 'generated multititle file exists')
       t.equals(multititle, multititleContent, 'generated multititle file looks okay')
 
-      rimraf(opts.build, function (err) {
+      fs.rm(opts.build, rimrafOpts, function (err) {
         t.error(err, 'cleanup')
         t.end()
       })
@@ -162,7 +163,7 @@ test('site generation - no directory indexes (pretty: false)', function (t) {
     pretty: false
   }
 
-  rimraf(opts.build, generateSite)
+  fs.rm(opts.build, rimrafOpts, generateSite)
 
   function generateSite () {
     sitedown(opts, function (err) {
@@ -185,7 +186,7 @@ test('site generation - no directory indexes (pretty: false)', function (t) {
       t.ok(multititle, 'generated multititle file exists')
       t.equals(multititle, multititleContent, 'generated multititle file looks okay')
 
-      rimraf(opts.build, function (err) {
+      fs.rm(opts.build, rimrafOpts, function (err) {
         t.error(err, 'cleanup')
         t.end()
       })
@@ -203,7 +204,7 @@ test('site generation - custom element', function (t) {
     el: '.custom-element'
   }
 
-  rimraf(opts.build, generateSite)
+  fs.rm(opts.build, rimrafOpts, generateSite)
 
   function generateSite () {
     sitedown(opts, function (err) {
@@ -214,7 +215,7 @@ test('site generation - custom element', function (t) {
       t.ok(index, 'README.md converted to index.html')
       t.equals(index, customElementContent, 'produced expected output')
 
-      rimraf(opts.build, function (err) {
+      fs.rm(opts.build, rimrafOpts, function (err) {
         t.error(err, 'cleanup')
         t.end()
       })
@@ -231,7 +232,7 @@ test('site generation - prefix heading IDs and add anchor links', function (t) {
     githubHeadings: true
   }
 
-  rimraf(opts.build, generateSite)
+  fs.rm(opts.build, rimrafOpts, generateSite)
 
   function generateSite () {
     sitedown(opts, function (err) {
@@ -242,7 +243,7 @@ test('site generation - prefix heading IDs and add anchor links', function (t) {
       t.ok(index, 'README.md converted to index.html')
       t.equals(index, indexContentWithPrefixAndAnchors, 'produced expected output')
 
-      rimraf(opts.build, function (err) {
+      fs.rm(opts.build, rimrafOpts, function (err) {
         t.error(err, 'cleanup')
         t.end()
       })
