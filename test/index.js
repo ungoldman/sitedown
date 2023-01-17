@@ -119,6 +119,7 @@ test('site generation', function (t) {
       t.equals(multititle, multititleContent, 'generated multititle file looks okay')
 
       fs.rm(opts.build, rimrafOpts, function (err) {
+        if (err) console.error(err)
         t.error(err, 'cleanup')
         t.end()
       })
@@ -187,6 +188,7 @@ test('site generation - no directory indexes (pretty: false)', function (t) {
       t.equals(multititle, multititleContent, 'generated multititle file looks okay')
 
       fs.rm(opts.build, rimrafOpts, function (err) {
+        if (err) console.error(err)
         t.error(err, 'cleanup')
         t.end()
       })
@@ -216,6 +218,7 @@ test('site generation - custom element', function (t) {
       t.equals(index, customElementContent, 'produced expected output')
 
       fs.rm(opts.build, rimrafOpts, function (err) {
+        if (err) console.error(err)
         t.error(err, 'cleanup')
         t.end()
       })
@@ -244,6 +247,7 @@ test('site generation - prefix heading IDs and add anchor links', function (t) {
       t.equals(index, indexContentWithPrefixAndAnchors, 'produced expected output')
 
       fs.rm(opts.build, rimrafOpts, function (err) {
+        if (err) console.error(err)
         t.error(err, 'cleanup')
         t.end()
       })
