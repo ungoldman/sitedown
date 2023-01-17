@@ -95,7 +95,8 @@ test('site generation', function (t) {
     hljsHighlights: true
   }
 
-  fs.rm(opts.build, rimrafOpts, generateSite)
+  fs.rmSync(opts.build, rimrafOpts)
+  generateSite()
 
   function generateSite () {
     sitedown(opts, function (err) {
@@ -118,11 +119,8 @@ test('site generation', function (t) {
       t.ok(multititle, 'generated multititle file exists')
       t.equals(multititle, multititleContent, 'generated multititle file looks okay')
 
-      fs.rm(opts.build, rimrafOpts, function (err) {
-        if (err) console.error(err)
-        t.error(err, 'cleanup')
-        t.end()
-      })
+      fs.rmSync(opts.build, rimrafOpts)
+      t.end()
     })
   }
 })
@@ -164,7 +162,8 @@ test('site generation - no directory indexes (pretty: false)', function (t) {
     pretty: false
   }
 
-  fs.rm(opts.build, rimrafOpts, generateSite)
+  fs.rmSync(opts.build, rimrafOpts)
+  generateSite()
 
   function generateSite () {
     sitedown(opts, function (err) {
@@ -187,11 +186,8 @@ test('site generation - no directory indexes (pretty: false)', function (t) {
       t.ok(multititle, 'generated multititle file exists')
       t.equals(multititle, multititleContent, 'generated multititle file looks okay')
 
-      fs.rm(opts.build, rimrafOpts, function (err) {
-        if (err) console.error(err)
-        t.error(err, 'cleanup')
-        t.end()
-      })
+      fs.rmSync(opts.build, rimrafOpts)
+      t.end()
     })
   }
 })
@@ -206,7 +202,8 @@ test('site generation - custom element', function (t) {
     el: '.custom-element'
   }
 
-  fs.rm(opts.build, rimrafOpts, generateSite)
+  fs.rmSync(opts.build, rimrafOpts)
+  generateSite()
 
   function generateSite () {
     sitedown(opts, function (err) {
@@ -217,11 +214,8 @@ test('site generation - custom element', function (t) {
       t.ok(index, 'README.md converted to index.html')
       t.equals(index, customElementContent, 'produced expected output')
 
-      fs.rm(opts.build, rimrafOpts, function (err) {
-        if (err) console.error(err)
-        t.error(err, 'cleanup')
-        t.end()
-      })
+      fs.rmSync(opts.build, rimrafOpts)
+      t.end()
     })
   }
 })
@@ -235,7 +229,8 @@ test('site generation - prefix heading IDs and add anchor links', function (t) {
     githubHeadings: true
   }
 
-  fs.rm(opts.build, rimrafOpts, generateSite)
+  fs.rmSync(opts.build, rimrafOpts)
+  generateSite()
 
   function generateSite () {
     sitedown(opts, function (err) {
@@ -246,11 +241,8 @@ test('site generation - prefix heading IDs and add anchor links', function (t) {
       t.ok(index, 'README.md converted to index.html')
       t.equals(index, indexContentWithPrefixAndAnchors, 'produced expected output')
 
-      fs.rm(opts.build, rimrafOpts, function (err) {
-        if (err) console.error(err)
-        t.error(err, 'cleanup')
-        t.end()
-      })
+      fs.rmSync(opts.build, rimrafOpts)
+      t.end()
     })
   }
 })
