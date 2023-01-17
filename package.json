@@ -10,7 +10,6 @@
     "url": "https://github.com/ungoldman/sitedown/issues"
   },
   "dependencies": {
-    "@ungoldman/serve": "^14.1.0",
     "cheerio": "^1.0.0-rc.3",
     "cliclopts": "^1.1.1",
     "event-stream": "4.0.1",
@@ -29,7 +28,8 @@
     "markdown-it-sup": "^1.0.0",
     "minimist": "^1.1.1",
     "mkdirp": "^2.1.2",
-    "readdirp": "^3.5.0"
+    "readdirp": "^3.5.0",
+    "serve": "^14.1.2"
   },
   "devDependencies": {
     "gh-pages": "^4.0.0",
