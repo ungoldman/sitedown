@@ -1,10 +1,21 @@
 # sitedown changelog
+- All notable changes to this project will be documented in this file.
+- The format is based on [Keep a Changelog](https://keepachangelog.com).
+- This project adheres to [Semantic Versioning](https://semver.org).
 
-All notable changes to this project will be documented in this file.
+## [5.1.3](https://github.com/ungoldman/sitedown/releases/v5.1.3) - 2023-01-20
 
-The format is based on [Keep a Changelog](https://keepachangelog.com).
+Maintenance update. Resolves security warnings for underlying dependency.
 
-This project adheres to [Semantic Versioning](https://semver.org).
+### Dependency updates
+- deps: serve@14.1.2
+- fix: rm rimraf, use fs.rm
+- deps: mkdirp@^2.1.2
+
+### Dev dependency updates
+- chore(deps-dev): bump gh-release from 6.0.4 to 7.0.0 (#50)
+- chore(deps-dev): bump npm-run-all2 from 5.0.2 to 6.0.0 (#49)
+- chore(deps-dev): bump gh-pages from 3.2.3 to 4.0.0 (#48)
 
 ## [5.1.2](https://github.com/ungoldman/sitedown/releases/v5.1.2) - 2022-05-07
 
