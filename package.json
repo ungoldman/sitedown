@@ -1,7 +1,7 @@
 {
   "name": "sitedown",
   "description": "Minimalist Markdown-based static site generator",
-  "version": "5.1.2",
+  "version": "5.1.3",
   "author": "Nate Goldman <ungoldman@gmail.com>",
   "bin": {
     "sitedown": "./bin.js"
