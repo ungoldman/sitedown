@@ -60,6 +60,7 @@
   "scripts": {
     "gh-pages": "npm run site && gh-pages -d site",
     "postrelease": "npm publish",
+    "prerelease": "gitch fetch --all --prune && git push && git push --tags",
     "pretest": "standard | snazzy",
     "release": "gh-release",
     "serve:site": "serve site",
