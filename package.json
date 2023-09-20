@@ -37,7 +37,7 @@
     "npm-run-all2": "^6.0.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
-    "tap-arc": "^0.4.0",
+    "tap-arc": "^1.0.1",
     "tape": "^5.0.1"
   },
   "engines": {
