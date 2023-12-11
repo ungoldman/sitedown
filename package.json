@@ -19,7 +19,7 @@
     "markdown-it-abbr": "^1.0.4",
     "markdown-it-deflist": "^2.0.1",
     "markdown-it-emoji": "^2.0.0",
-    "markdown-it-footnote": "^3.0.1",
+    "markdown-it-footnote": "^4.0.0",
     "markdown-it-github-headings": "^2.0.0",
     "markdown-it-highlightjs": "^4.0.1",
     "markdown-it-ins": "^3.0.0",
